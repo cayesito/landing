@@ -1,0 +1,74 @@
+.cont{
+    width: 100vw;
+    height: 40vh;
+    /*background: #0f0c29;  /* fallback for old browsers */
+    /*background: -webkit-linear-gradient(to bottom, #24243e, #302b63, #0f0c29);  /* Chrome 10-25, Safari 5.1-6 */
+    /*background: linear-gradient(to bottom, #24243e, #302b63, #0f0c29); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: black;
+}
+
+h1{
+    padding-top: 30px;
+    font-size: 60px;
+}
+
+.icon{
+    width: 60px;
+    height: 60px;
+}
+
+.head{
+    margin-left: 10vw;
+    margin-right: 10vw;
+    padding-top: 5vh;
+    font-family: RockSalt, sans-serif;
+    color: white;
+}
+
+@font-face {
+    font-family: 'RockSalt'; /* Name your font family */
+    src: url('../fonts/RockSalt-Regular.ttf'); /* Locate the .ttf file within your directory*/
+}
+
+.example{
+    position: absolute;
+    right: 0%;
+    margin-right: 10vw;
+}
+
+body{
+    position: absolute;
+}
+
+.model{
+    width: 400px;
+    height: 800px;
+    display: block; /* Ensure block-level behavior */
+    margin-left: auto;
+    margin-right: auto;
+
+}
+.mainContainer{
+    margin-left: 15vw;
+    margin-right: 15vw;
+}
+
+.char{
+    color: black;
+    font-family: RockSalt, sans-serif;
+}
+
+.caracteristicas{
+    padding-top: 60px;
+}
+
+.iconBig{
+    width: 90px;
+    height: 90px;
+}
+
+.text{
+    padding-left: 80px;
+    color: black;
+    font-size: 30px;
+}
