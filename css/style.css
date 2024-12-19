@@ -38,6 +38,7 @@ h1{
 
 body{
     position: absolute;
+    overflow-x: hidden; 
 }
 
 .model{
@@ -72,3 +73,128 @@ body{
     color: black;
     font-size: 30px;
 }
+
+.footer{
+    margin-top: 100px;
+    height: 40vh;
+    background-color: black;
+}
+
+.char2{
+    color: white;
+    font-family: RockSalt, sans-serif;
+}
+
+.char3{
+    color: white;
+    font-family: RockSalt, sans-serif;
+    font-size: 52px;
+}
+
+
+.text2{
+    padding-top: 20px;
+    color: white;
+    font-size: 25px;
+}
+
+input:focus::placeholder {
+    color: transparent;
+  }
+
+.form__group {
+  position: relative;
+  padding: 15px 0 0;
+  margin-top: 10px;
+  width: 50%;
+}
+
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid gray;
+  outline: 0;
+  font-size: 1.3rem;
+  color: white;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+
+  &::placeholder {
+    color: transparent;
+  }
+
+  &:placeholder-shown ~ .form__label {
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+  }
+}
+
+.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: gray;
+}
+
+.form__field:focus {
+  ~ .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: primary;
+    font-weight:700;    
+  }
+  padding-bottom: 6px;  
+  font-weight: 700;
+  border-width: 3px;
+  border-image: linear-gradient(to right, primary,secondary);
+  border-image-slice: 1;
+}
+/* reset input */
+.form__field{
+  &:required,&:invalid { box-shadow:none; }
+}
+
+.button {
+    margin-top: 15px;
+    width: 220px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: black;
+    background: white;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+}
+
+.right{
+    position: absolute;
+    right: 5%;
+    bottom: 2.5%;
+}
+
+.second{
+    margin-right: 130px;
+}
+
+.third{
+    margin-right: 260px;
+}
+
+.four{
+    margin-right: 390px;
+}
+
+.top{
+    bottom: 7.5%; 
+}
+
