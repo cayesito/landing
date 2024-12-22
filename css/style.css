@@ -9,7 +9,7 @@
 
 h1{
     padding-top: 30px;
-    font-size: 60px;
+    font-size: 40px;
 }
 
 .icon{
@@ -34,6 +34,8 @@ h1{
     position: absolute;
     right: 0%;
     margin-right: 10vw;
+    width: 400px;
+    height: 250px;
 }
 
 body{
@@ -42,8 +44,8 @@ body{
 }
 
 .model{
-    width: 400px;
-    height: 800px;
+    width: 300px;
+    height: 600px;
     display: block; /* Ensure block-level behavior */
     margin-left: auto;
     margin-right: auto;
@@ -64,14 +66,14 @@ body{
 }
 
 .iconBig{
-    width: 90px;
-    height: 90px;
+    width: 50px;
+    height: 50px;
 }
 
 .text{
-    padding-left: 80px;
+    padding-left: 40px;
     color: black;
-    font-size: 30px;
+    font-size: 20px;
 }
 
 .footer{
@@ -83,6 +85,7 @@ body{
 .char2{
     color: white;
     font-family: RockSalt, sans-serif;
+    font-size: 30px;
 }
 
 .char3{
@@ -95,7 +98,7 @@ body{
 .text2{
     padding-top: 20px;
     color: white;
-    font-size: 25px;
+    font-size: 15px;
 }
 
 input:focus::placeholder {
@@ -137,7 +140,7 @@ input:focus::placeholder {
   top: 0;
   display: block;
   transition: 0.2s;
-  font-size: 1rem;
+  font-size: 15px;
   color: gray;
 }
 
@@ -147,7 +150,7 @@ input:focus::placeholder {
     top: 0;
     display: block;
     transition: 0.2s;
-    font-size: 1rem;
+    font-size: 15px;
     color: primary;
     font-weight:700;    
   }
@@ -198,3 +201,14 @@ input:focus::placeholder {
     bottom: 7.5%; 
 }
 
+.form__field{
+    font-size: 15px;
+}
+
+.form__label{
+    font-size: 15px;
+}
+
+.noPad{
+    padding-top: 0px !important;
+}
