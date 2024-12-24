@@ -1,6 +1,6 @@
 window.addEventListener("scroll", function () {
-    let header = document.getElementById("primary_text");
-    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  let header = document.getElementById("primary_text");
+  let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     header.style.opacity = 1 - scrollTop / 500;
 });
 
@@ -25,26 +25,6 @@ document.getElementById('form')
     });
 });
 
-let currentIndex = 0;
-
-document.querySelector('.prev-button').addEventListener('click', () => {
-   navigate(-1);
-});
-
-document.querySelector('.next-button').addEventListener('click', () => {
-   navigate(1);
-});
-
-function navigate(direction) {
-   const galleryContainer = document.querySelector('.gallery-container');
-   const totalImages = document.querySelectorAll('.gallery-item').length;
-
-   currentIndex = (currentIndex + direction + totalImages) % totalImages;
-   const offset = -currentIndex * 100;
-
-   galleryContainer.style.transform = `translateX(${offset}%)`;
-}
-
 let lastScrollTop = 0; // Variable para almacenar la última posición del scroll
 
 window.addEventListener('scroll', function() {
@@ -63,3 +43,41 @@ window.addEventListener('scroll', function() {
   // Actualizar la última posición del scroll
   lastScrollTop = scrollPosition <= 0 ? 0 : scrollPosition; // Evitar valores negativos
 });
+
+let currentIndex = 0;
+const slides = document.querySelector('.slides');
+const thumbnails = document.querySelectorAll('.thumbnail');
+const totalSlides = document.querySelectorAll('.slide').length;
+let autoSlideInterval;
+
+// Function to navigate to a specific slide
+function goToSlide(index) {
+  currentIndex = index;
+  slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+  // Update active thumbnail
+  thumbnails.forEach(thumb => thumb.classList.remove('active'));
+  thumbnails[currentIndex].classList.add('active');
+}
+
+// Start the auto-slide
+function startAutoSlide() {
+  autoSlideInterval = setInterval(() => {
+    currentIndex = (currentIndex + 1) % totalSlides;
+    goToSlide(currentIndex);
+  }, 5000);
+}
+
+function stopAutoSlide() {
+  clearInterval(autoSlideInterval);
+}
+
+function manualChange(index) {
+  stopAutoSlide();
+  goToSlide(index);
+  setTimeout(startAutoSlide, 5000);
+}
+
+// Initialize
+thumbnails[0].classList.add('active');
+startAutoSlide();
