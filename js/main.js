@@ -1,8 +1,8 @@
-window.addEventListener("scroll", function () {
+/*window.addEventListener("scroll", function () {
   let header = document.getElementById("primary_text");
   let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     header.style.opacity = 1 - scrollTop / 500;
-});
+});*/
 
 const btn = document.getElementById('button');
 
@@ -25,7 +25,7 @@ document.getElementById('form')
     });
 });
 
-let lastScrollTop = 0; // Variable para almacenar la última posición del scroll
+/*let lastScrollTop = 0; // Variable para almacenar la última posición del scroll
 
 window.addEventListener('scroll', function() {
   const footer = document.getElementById('footer');
@@ -42,42 +42,72 @@ window.addEventListener('scroll', function() {
 
   // Actualizar la última posición del scroll
   lastScrollTop = scrollPosition <= 0 ? 0 : scrollPosition; // Evitar valores negativos
-});
+});*/
 
 let currentIndex = 0;
-const slides = document.querySelector('.slides');
-const thumbnails = document.querySelectorAll('.thumbnail');
-const totalSlides = document.querySelectorAll('.slide').length;
-let autoSlideInterval;
+  let slides = document.querySelector('.slides');
+  let slideCount = document.querySelectorAll('.slide').length;
+  let autoSlideInterval;
 
-// Function to navigate to a specific slide
-function goToSlide(index) {
-  currentIndex = index;
-  slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+  // Función para ir a un slide específico
+  function goToSlide(index) {
+    // Si estamos en el último slide y vamos al siguiente, ir al primer slide sin transición visible
+    if (index === slideCount) {
+      currentIndex = 0;
+      slides.style.transition = 'none'; // Desactivar la transición
+      slides.style.transform = `translateX(0)`;
+      setTimeout(() => {
+        slides.style.transition = 'transform 0.5s ease-in-out'; // Volver a activar la transición
+        currentIndex = 1; // Ir al segundo slide (lo cual hará que se vean bien los slides)
+        slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+      }, 50); // Esperar que la transición sin movimiento haya terminado
+    } else if (index === -1) {
+      // Volver a la última imagen sin intermedios
+      currentIndex = slideCount - 1;
+      slides.style.transition = 'none';
+      slides.style.transform = `translateX(-${(currentIndex) * 100}%)`;
+      setTimeout(() => {
+        slides.style.transition = 'transform 0.5s ease-in-out'; // Reestablecer la transición
+      }, 50);
+    } else {
+      currentIndex = index;
+      slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
 
-  // Update active thumbnail
-  thumbnails.forEach(thumb => thumb.classList.remove('active'));
-  thumbnails[currentIndex].classList.add('active');
-}
+    // Actualizar miniaturas
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    thumbnails.forEach(thumb => thumb.classList.remove('active'));
+    thumbnails[currentIndex].classList.add('active');
+  }
 
-// Start the auto-slide
-function startAutoSlide() {
-  autoSlideInterval = setInterval(() => {
-    currentIndex = (currentIndex + 1) % totalSlides;
-    goToSlide(currentIndex);
-  }, 5000);
-}
+  // Función para iniciar el cambio automático de imágenes
+  function startAutoSlide() {
+    autoSlideInterval = setInterval(() => {
+      currentIndex++;
+      if (currentIndex >= slideCount) {
+        currentIndex = 0; // Volver al primer slide al llegar al final
+      }
+      goToSlide(currentIndex);
+    }, 5000); // Cambiar cada 5 segundos
+  }
 
-function stopAutoSlide() {
-  clearInterval(autoSlideInterval);
-}
+  // Detener el auto-slide y reiniciar el temporizador
+  function restartAutoSlide() {
+    clearInterval(autoSlideInterval);
+    startAutoSlide();
+  }
 
-function manualChange(index) {
-  stopAutoSlide();
-  goToSlide(index);
-  setTimeout(startAutoSlide, 5000);
-}
+  // Configurar la primera miniatura como activa por defecto
+  document.querySelectorAll('.thumbnail')[0].classList.add('active');
+  
+  // Iniciar el auto-slide al cargar la página
+  startAutoSlide();
 
-// Initialize
-thumbnails[0].classList.add('active');
-startAutoSlide();
+  // Detectar clics en las miniaturas y reiniciar el temporizador
+  const thumbnails = document.querySelectorAll('.thumbnail');
+  thumbnails.forEach((thumb, index) => {
+    thumb.addEventListener('click', () => {
+      goToSlide(index);
+      restartAutoSlide(); // Reiniciar el temporizador al hacer clic en una miniatura
+    });
+  });

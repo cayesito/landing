@@ -13,9 +13,49 @@ var prodId = getParameterByName('prodId');
 
 const authContainer = document.getElementById('auth-container');
 
-document.getElementById('create-account-link').addEventListener('click', function(event) {
-    event.preventDefault();
+function sendEmail(email) {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve();
+        }, 3000);
+    });
+}
 
+function showLogin() {
+    authContainer.innerHTML = `
+        <h1>Iniciar Sesión</h1>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="username">Usuario</label>
+                <input type="text" id="username" name="username" placeholder="Ingresa tu usuario" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" required>
+            </div>
+            <button type="submit" class="btn">Ingresar</button>
+        </form>
+        <p>¿No tienes una cuenta? <a href="#" id="create-account-link">Regístrate aquí</a></p>
+    `;
+    document.getElementById('create-account-link').addEventListener('click', function(event) {
+        event.preventDefault();
+        showRegister();
+    });
+
+    document.getElementById('login-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        if (username && password) {
+            window.location.href = "dashboard.html"; // Redirige a otra página
+        } else {
+            alert('Por favor, completa todos los campos.');
+        }
+    });
+}
+
+function showRegister() {
     authContainer.innerHTML = `
         <h1>Crear Cuenta</h1>
         <form id="register-form">
@@ -42,10 +82,10 @@ document.getElementById('create-account-link').addEventListener('click', functio
 
     document.getElementById('back-to-login').addEventListener('click', function(event) {
         event.preventDefault();
-        location.reload();
+        showLogin();
     });
 
-    document.getElementById('register-form').addEventListener('submit', function(event) {
+    document.getElementById('register-form').addEventListener('submit', async function(event) {
         event.preventDefault();
         const username = document.getElementById('name_of').value;
         const email = document.getElementById('reply_to').value;
@@ -57,33 +97,32 @@ document.getElementById('create-account-link').addEventListener('click', functio
             return;
         }
 
-        const btn = document.getElementById('button');
-
         document.getElementById('register-form')
         .addEventListener('submit', function(event) {
         event.preventDefault();
 
         const serviceID = 'default_service';
         const templateID = 'template_npq3u3r';
-
         emailjs.sendForm(serviceID, templateID, this)
             .then(() => {
-                alert('Sent!');
+                
             }, (err) => {
                 alert(JSON.stringify(err));
+                returnToStart()
             });
         });
+        await sendEmail(email);
+
+        // Mostrar mensaje de cuenta creada
+        authContainer.innerHTML = `
+            <div class="message">¡Cuenta creada exitosamente! Se te ha enviado un correo de confirmación</div>
+        `;
+
+        setTimeout(() => {
+            showLogin();
+        }, 2000); // Regresar a inicio de sesión después de 2 segundos
     });
-});
+}
 
-document.getElementById('login-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-
-    if (username && password) {
-        window.location.href = "pago.html" + "?prodId=" + prodId;
-    } else {
-        alert('Por favor, completa todos los campos.');
-    }
-});
+// Mostrar la pantalla de inicio de sesión al cargar
+showLogin();
