@@ -33,6 +33,18 @@ app.post('/guardar-datos', (req, res) => {
             }
         }
 
+        const usuarioExistente = datosExistentes.find(user => user.usuario === nuevosDatos.usuario);
+
+        if (usuarioExistente) {
+            return res.status(400).json({ error: 'userAlreadyExists' });
+        }
+
+        const emailExistente = datosExistentes.find(user => user.email === nuevosDatos.email);
+
+        if (emailExistente) {
+            return res.status(400).json({ error: 'emailAlreadyExists' });
+        }
+
         // Agregar el nuevo dato al array
         datosExistentes.push(nuevosDatos);
 
@@ -63,6 +75,60 @@ app.get('/obtener-datos', (req, res) => {
         } catch (parseError) {
             console.error('Error al parsear el archivo JSON:', parseError);
             return res.status(500).send('Error al parsear los datos');
+        }
+    });
+});
+
+app.put('/update', (req, res) => {
+
+    const { userId, newPassword } = req.body;
+
+    if (!userId || !newPassword) {
+        return res.status(400).json({ error: 'Debe proporcionar un userId y una nueva contraseña.' });
+    }
+
+    // Ruta del archivo JSON
+    const filePath = './data/datos.json';
+
+    // Leer el archivo JSON
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error al leer el archivo JSON:', err);
+            return res.status(500).json({ error: 'Error al leer el archivo JSON.' });
+        }
+
+        try {
+            // Parsear el contenido JSON
+
+            const usuarios = JSON.parse(data);
+
+            // Buscar al usuario por userId
+            const usuario = usuarios.find(user => user.usuario === String(userId) || user.email === String(userId));
+
+            if (!usuario) {
+                return res.status(404).json({ error: 'Usuario no encontrado.' });
+            }
+
+            // Verificar si la nueva contraseña es igual a la actual
+            if (usuario.password === newPassword) {
+                return res.status(400).json({ error: 'samePassword' });
+            }
+
+            // Actualizar la contraseña del usuario
+            usuario.password = newPassword;
+
+            // Guardar los datos actualizados en el archivo JSON
+            fs.writeFile(filePath, JSON.stringify(usuarios, null, 2), 'utf8', (err) => {
+                if (err) {
+                    console.error('Error al escribir en el archivo JSON:', err);
+                    return res.status(500).json({ error: 'Error al guardar los datos.' });
+                }
+
+                res.status(200).json({ message: 'Contraseña actualizada con éxito.' });
+            });
+        } catch (parseError) {
+            console.error('Error al parsear el JSON:', parseError);
+            res.status(500).json({ error: 'Error al procesar los datos.' });
         }
     });
 });

@@ -10,7 +10,6 @@ function getParameterByName(name) {
 }
 
 var prodId = getParameterByName('prodId');
-let userCreated = false
 let username
 let password
 
@@ -31,10 +30,16 @@ function showLogin() {
             <button type="submit" class="btn">Ingresar</button>
         </form>
         <p>¿No tienes una cuenta? <a href="#" id="create-account-link">Regístrate aquí</a></p>
+        <p>¿Te has olvidado la contraseña? <a href="#" id="recover-password-link"><br>Recuperala aquí</a></p>
     `;
     document.getElementById('create-account-link').addEventListener('click', function(event) {
         event.preventDefault();
         showRegister();
+    });
+
+    document.getElementById('recover-password-link').addEventListener('click', function(event) {
+        event.preventDefault();
+        showRecoverUser();
     });
 
     document.getElementById('login-form').addEventListener('submit', function(event) {
@@ -45,31 +50,136 @@ function showLogin() {
         if (username2 && password2) {
             // Solicitar los datos del servidor (usuarios registrados)
             fetch('http://localhost:3000/obtener-datos')
-                .then(response => response.json())
-                .then(data => {
-                    let usuarioValido = false;
-    
-                    // Compara con los usuarios guardados en datos.json
-                    data.forEach(user => {
-                        if (user.usuario === username2 && user.password === password2) {
-                            usuarioValido = true;
-                            window.location.href = "pago.html?prodId=" + prodId + "&name=" + user.usuario;
-                        }
-                    });
-    
-                    // Si no se encontró el usuario, muestra un mensaje
-                    if (!usuarioValido) {
-                        showAlert("El usuario y la contraseña no coinciden con los que has creado.", 'error');
+            .then(response => response.json())
+            .then(data => {
+                let usuarioValido = false;
+
+                // Compara con los usuarios guardados en datos.json
+                data.forEach(user => {
+                    if (user.usuario === username2 && user.password === password2) {
+                        usuarioValido = true;
+                        window.location.href = "pago.html?prodId=" + prodId + "&name=" + user.usuario;
                     }
-                })
-                .catch(error => {
-                    console.error('Error al obtener los datos de los usuarios:', error);
                 });
+
+                // Si no se encontró el usuario, muestra un mensaje
+                if (!usuarioValido) {
+                    showAlert("El usuario y la contraseña no coinciden con los que has creado.", 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error al obtener los datos de los usuarios:', error);
+            });
         } else {
             showAlert('Por favor, completa todos los campos.', 'warning');
         }
     });
 }
+
+function showRecoverUser() {
+    authContainer.innerHTML = `
+        <h1>Crear Cuenta</h1>
+        <form id="register-form">
+            <div class="form-group">
+                <label for="new-username">Usuario</label>
+                <input type="text" name="name_of" id="name_of" placeholder="Elige un usuario" required>
+            </div>
+        <button type="submit" class="btn">Recuperar</button>
+        <p>¿Ya tienes una cuenta? <a href="#" id="back-to-login">Inicia sesión</a></p>
+    `;
+
+    document.getElementById('back-to-login').addEventListener('click', function(event) {
+        event.preventDefault();
+        showLogin();
+    });
+
+    document.getElementById('register-form').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const username2 = document.getElementById('name_of').value;
+
+        fetch('http://localhost:3000/obtener-datos')
+        .then(response => response.json())
+        .then(data => {
+            let usuarioValido = false;
+
+            // Compara con los usuarios guardados en datos.json
+            data.forEach(user => {
+                if (user.usuario === username2 || user.email === username2) {
+                    usuarioValido = true;
+                    showRecoverPassword(username2)
+                }
+            });
+
+            // Si no se encontró el usuario, muestra un mensaje
+            if (!usuarioValido) {
+                showAlert("Ese usuario no existe.", 'error');
+            }
+        })
+        .catch(error => {
+            console.error('Error al obtener los datos de los usuarios:', error);
+        });
+    });
+}
+
+function showRecoverPassword(user){
+    authContainer.innerHTML = `
+        <h1>Crear Cuenta</h1>
+        <form id="register-form">
+            <div class="form-group">
+                <label for="new-password">Nueva contraseña</label>
+                <input type="password" id="new-password" name="new-password" placeholder="Elige una contraseña" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirmar nueva contraseña</label>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirma tu contraseña" required>
+            </div>
+            <button type="submit" class="btn" id="button">Cambiar contraseña</button>
+        </form>
+    `;
+
+    document.getElementById('register-form').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const newPassword = document.getElementById("new-password").value;
+        const confirmNewPassword = document.getElementById("confirm-password").value;
+        const userId = user
+
+        if (newPassword === confirmNewPassword) {
+            fetch('http://localhost:3000/update', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ userId, newPassword })  // Asegúrate de que userId y newPassword están bien definidos
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                if(data.error === "samePassword"){
+                    showAlert("La contraseña nueva no puede ser la misma que la anterior", "warning")
+                } else {
+                    // Mostrar mensaje de éxito
+                    authContainer.innerHTML = `
+                    <div class="message">¡Contraseña cambiada con éxito!</div>
+                    `;
+                    setTimeout(() => {
+                        showLogin(); // Regresar a inicio de sesión después de 2 segundos
+                    }, 2000);
+                }
+            })
+            .catch(error => {
+                console.error('Error al actualizar la contraseña:', error);
+                showAlert('Hubo un problema al cambiar la contraseña. Inténtalo de nuevo.', 'error');
+            });
+        } else {
+            showAlert('Las contraseñas no coinciden', 'warning');
+        }
+    });
+}
+
+// Mostrar la pantalla de inicio de sesión al cargar
+showLogin();
 
 function showRegister() {
     authContainer.innerHTML = `
@@ -91,7 +201,7 @@ function showRegister() {
                 <label for="confirm-password">Confirmar Contraseña</label>
                 <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirma tu contraseña" required>
             </div>
-            <button type="submit" class="btn" id="button">Crear Cuenta</button>
+            <button type="submit" class="btn" id="button")">Crear Cuenta</button>
         </form>
         <p>¿Ya tienes una cuenta? <a href="#" id="back-to-login">Inicia sesión</a></p>
     `;
@@ -101,30 +211,22 @@ function showRegister() {
         showLogin();
     });
 
-    document.getElementById('register-form').addEventListener('submit', async function(event) {
+    document.getElementById('button').addEventListener('click', function(event) {
         event.preventDefault();
+        
+        const nombre = document.getElementById("name_of").value
+        const email = document.getElementById("reply_to").value
+        const pass = document.getElementById("new-password").value
+        const confirmPass = document.getElementById("confirm-password").value
+        const button = document.getElementById("button").value
 
-        const btn = document.getElementById('button');
-
-        username = document.getElementById('name_of').value;
-        const email = document.getElementById('reply_to').value;
-        password = document.getElementById('new-password').value;
-        const confirmPassword = document.getElementById('confirm-password').value;
-
-        if (password !== confirmPassword) {
-            alert('Las contraseñas no coinciden.');
-            return;
+        if (pass === confirmPass) {
+            sendInfo(nombre, email, pass, button)
+        } else {
+            showAlert('Las contraseñas no coinciden', 'warning');
         }
-        userCreated = true
-        await sendInfo(username, email, password, btn);
-            
     });
 }
-
-// Mostrar la pantalla de inicio de sesión al cargar
-showLogin();
-
-
 
 function sendInfo(user, mail, pass, btn){
     btn.innerText = 'Sending...';
@@ -144,7 +246,14 @@ function sendInfo(user, mail, pass, btn){
     })
     .then(response => response.json())
     .then(data => {
-        sendEmail();
+        console.log(data)
+        if (data.error === 'userAlreadyExists'){
+            showAlert("Ese nombre de usuario ya exite, intenta iniciar sesión", "warning")
+        } else if(data.error === 'emailAlreadyExists'){
+            showAlert("Ese email ya esta en uso, intenta iniciar sesión", "warning")
+        } else if(data.message === 'Datos guardados correctamente'){
+            sendEmail();
+        }
     })
     .catch(error => {
         console.error('Error al guardar los datos:', error);
@@ -171,7 +280,6 @@ function sendEmail(){
     });
 }
 
-// Función para mostrar la alerta personalizada
 // Función para mostrar la alerta
 function showAlert(message, type = 'error') {
     const alertBox = document.getElementById('custom-alert');
@@ -200,9 +308,6 @@ function showAlert(message, type = 'error') {
     // Mostrar la alerta con animación
     alertBox.classList.add('show');
     alertBox.style.display = "flex";  // Asegurarse de que el display sea flex cuando se muestre
-
-    // Verifica si la alerta tiene las clases correctas
-    console.log(alertBox.classList);
 }
 
 // Función para cerrar la alerta con animación

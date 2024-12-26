@@ -2,11 +2,16 @@
   {
     "usuario": "cayeym",
     "email": "cayetanoym@gmail.com",
-    "password": "123"
+    "password": "12"
   },
   {
     "usuario": "cayesito",
     "email": "cayetanoym1999@gmail.com",
     "password": "23"
+  },
+  {
+    "usuario": "Cayetano",
+    "email": "cayetanoym1999ym@gmail.com",
+    "password": "123456"
   }
 ]
