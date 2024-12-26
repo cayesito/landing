@@ -15,7 +15,7 @@ app.post('/guardar-datos', (req, res) => {
     const nuevosDatos = req.body;  // Recibe los datos enviados por el cliente
 
     // Leer el archivo JSON existente
-    fs.readFile('datos.json', 'utf8', (err, data) => {
+    fs.readFile('./data/datos.json', 'utf8', (err, data) => {
         if (err) {
             console.error('Error al leer el archivo:', err);
             return res.status(500).json({ mensaje: 'Error al leer el archivo JSON' });
@@ -37,7 +37,7 @@ app.post('/guardar-datos', (req, res) => {
         datosExistentes.push(nuevosDatos);
 
         // Guardar los datos actualizados en el archivo JSON
-        fs.writeFile('datos.json', JSON.stringify(datosExistentes, null, 2), 'utf8', (err) => {
+        fs.writeFile('./data/datos.json', JSON.stringify(datosExistentes, null, 2), 'utf8', (err) => {
             if (err) {
                 console.error('Error al guardar los datos:', err);
                 return res.status(500).send('Error al guardar los datos');
@@ -51,7 +51,7 @@ app.post('/guardar-datos', (req, res) => {
 
 app.get('/obtener-datos', (req, res) => {
     // Leer el archivo JSON existente
-    fs.readFile('datos.json', 'utf8', (err, data) => {
+    fs.readFile('./data/datos.json', 'utf8', (err, data) => {
         if (err) {
             console.error('Error al leer el archivo:', err);
             return res.status(500).json({ mensaje: 'Error al leer los datos' });
