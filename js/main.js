@@ -51,7 +51,7 @@ let currentIndex = 0;
 
   // Función para ir a un slide específico
   function goToSlide(index) {
-    // Si estamos en el último slide y vamos al siguiente, ir al primer slide sin transición visible
+
     if (index === slideCount) {
       currentIndex = 0;
       slides.style.transition = 'none'; // Desactivar la transición
@@ -111,3 +111,9 @@ let currentIndex = 0;
       restartAutoSlide(); // Reiniciar el temporizador al hacer clic en una miniatura
     });
   });
+
+function mostrarSuscripciones(){
+  let subBody = document.getElementById("three")
+  subBody.innerText = ""
+  subBody.innerHTML = "<div class='newCont'><div class='planContainer'><h1 class='planText'>Escoge tu plan de suscripción</h1><div class='plans'><div class='plan'><h2>Basico</h2><p>Envios gratuitos y un descuento del 10% en uno de nuestros productos mensualmente.</p><p class='price'>5€ / mes</p><a href='login.html?prodId=1' class='buttonPlan'>Suscribete</a></div><div class='plan'><h2>Avanzado</h2><p>Un produco gratuito a su eleccion y un descuento del 50% en cualquier compra mensual.</p><p class='price'>15€ / month</p><a href='login.html?prodId=2' class='buttonPlan'>Suscribete</a></div><div class='plan'><h2>Premium</h2><p>Lo mismo que en el avanzado pero añadiendo un 50% de descuento en todos los nuevos productos</p><p class='price'>30€ / month</p><a href='login.html?prodId=3' class='buttonPlan'>Suscribete</a></div></div></div>"
+}

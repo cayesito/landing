@@ -93,6 +93,83 @@
         a:hover {
             text-decoration: underline;
         }
+        /* Estilos para la alerta personalizada */
+        .alert {
+            background-color: #333; /* Fondo oscuro, acorde con el diseño de la página */
+            color: #fff; /* Texto blanco para contraste */
+            border-radius: 8px;
+            padding: 15px 20px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            z-index: 9999;
+            width: 90%;
+            max-width: 450px;
+            opacity: 0; /* Comienza invisible */
+            visibility: hidden; /* Se asegura de estar invisible antes de la animación */
+            transition: opacity 0.4s ease, transform 0.3s ease, visibility 0s 0.4s;
+            position: fixed; /* Esto mantiene la alerta fija en la pantalla */
+            top: 50%; /* Centra verticalmente */
+            left: 50%; /* Centra horizontalmente */
+            transform: translate(-50%, -50%); /* Ajusta la posición para que el centro de la alerta esté centrado */
+        }
+
+        /* Cuando la alerta está visible */
+        .alert.show {
+            opacity: 1; /* Hace que la alerta sea visible */
+            visibility: visible; /* Muestra la alerta */
+            transform: translate(-50%, -50%); /* Asegura que siga centrada */
+        }
+
+        /* Estilos de alerta específica para cada tipo */
+        .alert.error {
+            border-left: 5px solid #d32f2f; /* Rojo suave, menos brillante */
+            background-color: #4c1c24; /* Fondo oscuro para error */
+            color: #f44336; /* Texto rojo para error */
+        }
+
+        .alert.success {
+            border-left: 5px solid #388e3c; /* Verde suave para éxito */
+            background-color: #2c6c42; /* Fondo oscuro para éxito */
+            color: #4caf50; /* Texto verde para éxito */
+        }
+
+        .alert.warning {
+            border-left: 5px solid #f57c00; /* Amarillo cálido para advertencia */
+            background-color: #3e2c1c; /* Fondo oscuro para advertencia */
+            color: #ff9800; /* Texto amarillo cálido para advertencia */
+        }
+
+        /* Iconos de las alertas */
+        .alert-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 15px;
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Botón de cierre */
+        .close-btn {
+            background: none;
+            border: none;
+            color: inherit;
+            font-size: 20px;
+            cursor: pointer;
+            margin-left: 15px;
+        }
+
+        /* Animación de cierre */
+        .alert.close {
+            opacity: 0; /* Desaparece con la animación */
+            visibility: hidden; /* Hace invisible la alerta */
+            transform: translate(-50%, -50%) translateY(-20px); /* Aplica la animación de cierre */
+            transition: opacity 0.4s ease, transform 0.3s ease; /* Asegura que la animación de cierre sea suave */
+            pointer-events: none; /* Desactiva los eventos cuando la alerta está cerrada */
+        }
     </style>
 </head>
 <body>
@@ -110,6 +187,12 @@
             <button type="submit" class="btn">Ingresar</button>
         </form>
         <p>¿No tienes una cuenta? <a href="#" id="create-account-link">Regístrate aquí</a></p>
+    </div>
+    <!-- Contenedor para la alerta personalizada -->
+    <div id="custom-alert" class="alert">
+        <div class="alert-icon" id="alert-icon"></div>
+        <div id="alert-message"></div>
+        <button class="close-btn" onclick="closeAlert()">×</button>
     </div>
     <script type="text/javascript"
     src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
