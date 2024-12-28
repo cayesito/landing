@@ -51,7 +51,7 @@ if(usuarioLogged !== ""){
 
 const btn = document.getElementById('button');
 
-document.getElementById('form')
+document.getElementById('footer-form')
  .addEventListener('submit', function(event) {
    event.preventDefault();
 
@@ -164,7 +164,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function mostrarSuscripciones(){
   let subBody = document.getElementById("three")
-  let link = alredyLogged()
   subBody.innerText = ""
   subBody.innerHTML = `
   <div class='newCont'>
