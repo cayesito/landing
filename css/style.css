@@ -131,8 +131,8 @@ a:visited {
 }
 
 @font-face {
-    font-family: 'RockSalt'; /* Name your font family */
-    src: url('../fonts/RockSalt-Regular.ttf'); /* Locate the .ttf file within your directory*/
+    font-family: 'RockSalt';
+    src: url('../fonts/RockSalt-Regular.ttf');
 }
 
 .one{
@@ -147,7 +147,7 @@ body{
 .model{
     width: 300px;
     height: 600px;
-    display: block; /* Ensure block-level behavior */
+    display: block;
     margin-left: auto;
     margin-right: auto;
 
@@ -155,7 +155,6 @@ body{
 .mainContainer{
     margin-left: 15vw;
     margin-right: 15vw;
-    /*margin-bottom: 100px;*/
     padding-bottom: 140px;
     padding-top: 40px;
 }
@@ -181,8 +180,8 @@ body{
 }
 
 .footer{
-    opacity: 1; /* Opacidad inicial */
-    transition: opacity 0.3s ease; /* Transición suave */
+    opacity: 1; 
+    transition: opacity 0.3s ease;
     height: 40vh;
     background-color: black;
 }
@@ -265,7 +264,7 @@ input:focus::placeholder {
   border-image: linear-gradient(to right, primary,secondary);
   border-image-slice: 1;
 }
-/* reset input */
+
 .form__field{
   &:required,&:invalid { box-shadow:none; }
 }
@@ -341,14 +340,14 @@ input:focus::placeholder {
   width: 415px;
   height: 553px;
   overflow: hidden;
-  border-radius: 12px; /* Más moderno */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Sombra más prominente */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave para el slider */
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .slides {
   display: flex;
-  transition: transform 0.5s ease-in-out; /* Deslizamiento más suave */
+  transition: transform 0.5s ease-in-out;
 }
 
 .slide {
@@ -368,46 +367,45 @@ input:focus::placeholder {
   position: absolute;
   bottom: 20px;
   left: 20px;
-  right: 20px; /* Ajuste para no estar pegado al borde */
-  background: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
+  right: 20px;
+  background: rgba(0, 0, 0, 0.5);
   color: #fff;
   padding: 15px;
   border-radius: 10px;
-  font-size: 1.2rem; /* Tamaño de texto más grande */
+  font-size: 1.2rem;
   font-weight: bold;
   text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra sutil */
-  transition: opacity 0.3s ease, transform 0.3s ease; /* Suavizar la animación de entrada y salida */
-  transform: translateY(10px); /* Desplazar el caption ligeramente hacia abajo al principio */
-  opacity: 0; /* Inicialmente oculto */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateY(10px);
+  opacity: 0; 
 }
 
 .slider:hover {
-  transform: scale(1.05); /* Aumenta ligeramente el tamaño del slider */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada */
+  transform: scale(1.05); 
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); 
 }
 
-/* Efecto para el caption cuando el slider está en hover */
 .slider:hover .caption {
-  opacity: 1; /* Asegurarse de que el caption sea visible */
-  transform: translateY(0); /* Asegurarse de que el caption se mueva hacia su posición final */
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .slider:not(:hover) .caption {
-  opacity: 0; /* El caption se oculta de forma suave */
-  transform: translateY(10px); /* El caption se mueve hacia abajo de forma suave */
+  opacity: 0;
+  transform: translateY(10px);
 }
 
 .slider:not(:hover) {
-  transform: scale(1); /* Vuelve a su tamaño original */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave cuando no está en hover */
+  transform: scale(1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .thumbnails {
   display: flex;
   justify-content: center;
   margin-top: 20px;
-  gap: 15px; /* Espacio uniforme entre miniaturas */
+  gap: 15px;
 }
 
 .thumbnail {
@@ -415,15 +413,15 @@ input:focus::placeholder {
   height: 100px;
   margin: 0 10px;
   cursor: pointer;
-  border: 2px solid transparent; /* Elimina el borde blanco */
+  border: 2px solid transparent;
   border-radius: 5px;
   overflow: hidden;
   flex-shrink: 0;
-  background: transparent; /* Asegura que el fondo sea transparente */
+  background: transparent;
 }
 
 .thumbnail.active {
-  border-color: #4caf50; /* Color activo de borde */
+  border-color: #4caf50;
 }
 
 .thumbnail:hover {
@@ -452,23 +450,21 @@ html{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Ocupa toda la pantalla */
+  height: 100vh;
   padding: 0 20px;
-  margin: 0; /* Elimina márgenes */
+  margin: 0;
   box-sizing: border-box;
   text-align: center;
 }
 
-/* Título principal */
 .planText.h1 {
   font-family: 'RockSalt', cursive;
   font-size: 2.5rem;
-  color: #D4AF37; /* Dorado */
+  color: #D4AF37;
   margin-bottom: 40px;
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
 }
 
-/* Contenedor de planes */
 .plans {
   display: flex;
   flex-wrap: wrap;
@@ -476,7 +472,6 @@ html{
   gap: 20px;
 }
 
-/* Estilo de cada plan */
 .plan {
   background: #333333;
   border-radius: 12px;
@@ -493,16 +488,14 @@ html{
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
 }
 
-/* Título del plan */
 .plan h2 {
   font-size: 1.8rem;
-  color: #D4AF37; /* Dorado */
+  color: #D4AF37;
   margin-bottom: 15px;
   font-family: 'Roboto', sans-serif;
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
 }
 
-/* Descripción del plan */
 .plan p {
   font-size: 1rem;
   color: #e0e0e0;
@@ -510,15 +503,13 @@ html{
   margin-bottom: 20px;
 }
 
-/* Precio del plan */
 .plan .price {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #76c893; /* Verde suave */
+  color: #76c893;
   margin-bottom: 25px;
 }
 
-/* Botón de suscripción */
 .buttonPlan {
   display: inline-block;
   background: linear-gradient(45deg, #4CAF50, #76c893);
@@ -541,7 +532,6 @@ html{
   transform: scale(1);
 }
 
-/* Diseño responsivo */
 @media (max-width: 768px) {
   .plans {
     flex-direction: column;
@@ -563,13 +553,12 @@ html{
   line-height: 1.5;
   display: flex;
   justify-content: center;
-  align-items: center; /* Centrar contenido verticalmente */
-  height: 100vh; /* Asegurar que la sección ocupe todo el alto de la página */
+  align-items: center;
+  height: 100vh;
   padding: 0 20px;
-  overflow: hidden; /* Evitar el scroll */
+  overflow: hidden;
 }
 
-/* Sección principal */
 .mainSub {
   max-width: 900px;
   margin: 0 auto;
@@ -579,18 +568,16 @@ html{
   border-radius: 12px;
   color: #333333;
   font-size: 1.1rem;
-  max-height: 90vh; /* Limitar la altura máxima de la sección */
-  overflow-y: auto; /* Agregar scroll solo si es necesario */
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
-/* Estilos de los párrafos */
 .pSub {
   margin: 1.5rem 0;
   font-size: 1rem;
   color: #555555;
 }
 
-/* Estilo de los subtítulos */
 .h2Sub {
   color: #5f6366;
   margin-top: 2rem;
@@ -599,7 +586,6 @@ html{
   letter-spacing: 1px;
 }
 
-/* Estilo de la lista */
 .ulSub {
   list-style-type: none;
   padding: 0;
@@ -622,7 +608,6 @@ html{
   transform: translateY(-5px);
 }
 
-/* Estilo del botón */
 .buttonSub {
   display: block;
   background: #4caf50;
@@ -645,10 +630,9 @@ html{
   transform: translateY(-3px);
 }
 
-/* Estilo del encabezado */
 .headerSub {
-  background-color: #3a3f44; /* Gris oscuro */
-  color: #ffffff; /* Blanco para el texto */
+  background-color: #3a3f44;
+  color: #ffffff;
   padding: 30px 20px;
   text-align: center;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -667,11 +651,10 @@ html{
   text-transform: uppercase;
 }
 
-/* Estilos responsivos */
 @media (max-width: 768px) {
   .mainSub {
       padding: 1.5rem;
-      max-height: none; /* En pantallas más pequeñas, el contenido puede ocupar toda la altura */
+      max-height: none;
   }
 
   .ulSub .liSub {
