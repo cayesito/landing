@@ -4,6 +4,51 @@
     header.style.opacity = 1 - scrollTop / 500;
 });*/
 
+function getParameterByName(name) {
+  name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+  var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+  results = regex.exec(location.search);
+  return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+const usuarioLogged = getParameterByName("name")
+let menu = document.getElementById("menu")
+
+document.addEventListener('DOMContentLoaded', function() {
+  const productButton1 = document.getElementById("prod1");
+  const productButton2 = document.getElementById("prod2");
+  const productButton3 = document.getElementById("prod3");
+  const productButton4 = document.getElementById("prod4");
+  if(usuarioLogged !== ""){
+    const pageUrl1 = "views/buy.html?prodId=1&name=" + usuarioLogged;
+    productButton1.setAttribute("href", pageUrl1);
+    const pageUrl2 = "views/buy.html?prodId=2&name=" + usuarioLogged;
+    productButton2.setAttribute("href", pageUrl2);
+    const pageUrl3 = "views/buy.html?prodId=3&name=" + usuarioLogged;
+    productButton3.setAttribute("href", pageUrl3);
+    const pageUrl4 = "views/buy.html?prodId=4&name=" + usuarioLogged;
+    productButton4.setAttribute("href", pageUrl4);
+  } else{
+    const pageUrl1 = "views/login.html?prodId=1&notSub=1"
+    productButton1.setAttribute("href", pageUrl1);
+    const pageUrl2 = "views/login.html?prodId=2&notSub=1";
+    productButton2.setAttribute("href", pageUrl2);
+    const pageUrl3 = "views/login.html?prodId=3&notSub=1";
+    productButton3.setAttribute("href", pageUrl3);
+    const pageUrl4 = "views/login.html?prodId=4&notSub=1";
+    productButton4.setAttribute("href", pageUrl4);
+  }
+})
+
+if(usuarioLogged !== ""){
+  menu.innerHTML = `
+    <a href="views/user.html?name=${usuarioLogged}">${usuarioLogged}</a>
+    <img src="img/avatar.png" alt="Login Icon">
+    <a href="index.html">Log Out</a>
+    <img src="img/quitar-usuario.png" alt="Register Icon">
+  `
+}
+
 const btn = document.getElementById('button');
 
 document.getElementById('form')
@@ -44,76 +89,116 @@ window.addEventListener('scroll', function() {
   lastScrollTop = scrollPosition <= 0 ? 0 : scrollPosition; // Evitar valores negativos
 });*/
 
-let currentIndex = 0;
-  let slides = document.querySelector('.slides');
-  let slideCount = document.querySelectorAll('.slide').length;
+document.addEventListener("DOMContentLoaded", () => {
+  let currentIndex = 0;
+  const slides = document.querySelector(".slides");
+  const slideCount = document.querySelectorAll(".slide").length;
+  const thumbnails = document.querySelectorAll(".thumbnail");
   let autoSlideInterval;
 
   // Función para ir a un slide específico
-  function goToSlide(index) {
-
-    if (index === slideCount) {
-      currentIndex = 0;
-      slides.style.transition = 'none'; // Desactivar la transición
+  const goToSlide = (index) => {
+    // Asegúrate de que el índice esté dentro del rango
+    if (index < 0) {
+      currentIndex = slideCount - 1; // Ir al último slide
+      slides.style.transition = "none"; // Desactivar la transición
+      slides.style.transform = `translateX(-${currentIndex * 100}%)`; // Mover a la última imagen
+      setTimeout(() => {
+        slides.style.transition = "transform 0.5s ease-in-out"; // Reactivar la transición
+      }, 50);
+    } else if (index >= slideCount) {
+      currentIndex = 0; // Volver al primer slide
+      slides.style.transition = "none"; // Desactivar la transición
       slides.style.transform = `translateX(0)`;
       setTimeout(() => {
-        slides.style.transition = 'transform 0.5s ease-in-out'; // Volver a activar la transición
-        currentIndex = 1; // Ir al segundo slide (lo cual hará que se vean bien los slides)
-        slides.style.transform = `translateX(-${currentIndex * 100}%)`;
-      }, 50); // Esperar que la transición sin movimiento haya terminado
-    } else if (index === -1) {
-      // Volver a la última imagen sin intermedios
-      currentIndex = slideCount - 1;
-      slides.style.transition = 'none';
-      slides.style.transform = `translateX(-${(currentIndex) * 100}%)`;
-      setTimeout(() => {
-        slides.style.transition = 'transform 0.5s ease-in-out'; // Reestablecer la transición
+        slides.style.transition = "transform 0.5s ease-in-out"; // Reactivar la transición
       }, 50);
     } else {
       currentIndex = index;
-      slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+      slides.style.transform = `translateX(-${currentIndex * 100}%)`; // Mover al slide deseado
     }
 
     // Actualizar miniaturas
-    const thumbnails = document.querySelectorAll('.thumbnail');
-    thumbnails.forEach(thumb => thumb.classList.remove('active'));
-    thumbnails[currentIndex].classList.add('active');
-  }
+    thumbnails.forEach((thumb, i) => {
+      thumb.classList.toggle("active", i === currentIndex);
+      thumb.setAttribute("aria-selected", i === currentIndex);
+    });
+  };
 
-  // Función para iniciar el cambio automático de imágenes
-  function startAutoSlide() {
+  // Función para iniciar el auto-slide
+  const startAutoSlide = () => {
     autoSlideInterval = setInterval(() => {
-      currentIndex++;
-      if (currentIndex >= slideCount) {
-        currentIndex = 0; // Volver al primer slide al llegar al final
-      }
-      goToSlide(currentIndex);
-    }, 5000); // Cambiar cada 5 segundos
-  }
+      goToSlide((currentIndex + 1) % slideCount);
+    }, 5000);
+  };
 
-  // Detener el auto-slide y reiniciar el temporizador
-  function restartAutoSlide() {
+  // Función para reiniciar el temporizador del auto-slide
+  const restartAutoSlide = () => {
     clearInterval(autoSlideInterval);
     startAutoSlide();
-  }
+  };
 
-  // Configurar la primera miniatura como activa por defecto
-  document.querySelectorAll('.thumbnail')[0].classList.add('active');
-  
-  // Iniciar el auto-slide al cargar la página
-  startAutoSlide();
-
-  // Detectar clics en las miniaturas y reiniciar el temporizador
-  const thumbnails = document.querySelectorAll('.thumbnail');
+  // Configurar eventos de clic en miniaturas
   thumbnails.forEach((thumb, index) => {
-    thumb.addEventListener('click', () => {
+    thumb.addEventListener("click", () => {
       goToSlide(index);
-      restartAutoSlide(); // Reiniciar el temporizador al hacer clic en una miniatura
+      restartAutoSlide();
     });
   });
 
+  // Soporte para teclas de navegación
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") {
+      goToSlide((currentIndex + 1) % slideCount);
+      restartAutoSlide();
+    } else if (e.key === "ArrowLeft") {
+      goToSlide((currentIndex - 1 + slideCount) % slideCount);
+      restartAutoSlide();
+    }
+  });
+
+  // Iniciar auto-slide
+  goToSlide(0); // Configurar el primer slide como activo
+  startAutoSlide();
+});
+
 function mostrarSuscripciones(){
   let subBody = document.getElementById("three")
+  let link = alredyLogged()
   subBody.innerText = ""
-  subBody.innerHTML = "<div class='newCont'><div class='planContainer'><h1 class='planText'>Escoge tu plan de suscripción</h1><div class='plans'><div class='plan'><h2>Basico</h2><p>Envios gratuitos y un descuento del 10% en uno de nuestros productos mensualmente.</p><p class='price'>5€ / mes</p><a href='views/login.html?prodId=1' class='buttonPlan'>Suscribete</a></div><div class='plan'><h2>Avanzado</h2><p>Un produco gratuito a su eleccion y un descuento del 50% en cualquier compra mensual.</p><p class='price'>15€ / month</p><a href='views/login.html?prodId=2' class='buttonPlan'>Suscribete</a></div><div class='plan'><h2>Premium</h2><p>Lo mismo que en el avanzado pero añadiendo un 50% de descuento en todos los nuevos productos</p><p class='price'>30€ / month</p><a href='views/login.html?prodId=3' class='buttonPlan'>Suscribete</a></div></div></div>"
+  subBody.innerHTML = `
+  <div class='newCont'>
+    <div class='planContainer'>
+    <h1 class='planText h1'>Escoge tu plan de suscripción</h1>
+      <div class='plans'>
+        <div class='plan'>
+          <h2>Basico</h2>
+          <p>Envios gratuitos y un descuento del 10% en uno de nuestros productos mensualmente.</p>
+          <p class='price'>5€ / mes</p>
+          <a href='${alredyLogged(1)}' class='buttonPlan'>Suscribete</a>
+        </div>
+        <div class='plan'>
+          <h2>Avanzado</h2>
+          <p>Un produco gratuito a su eleccion y un descuento del 50% en cualquier compra mensual.</p>
+          <p class='price'>15€ / month</p>
+          <a href='${alredyLogged(2)}' class='buttonPlan'>Suscribete</a>
+        </div>
+        <div class='plan'>
+          <h2>Premium</h2>
+          <p>Lo mismo que en el avanzado pero añadiendo un 50% de descuento en todos los nuevos productos</p>
+          <p class='price'>30€ / month</p>
+          <a href='${alredyLogged(3)}' class='buttonPlan'>Suscribete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  `
+}
+  
+function alredyLogged(num){
+  if(usuarioLogged !== ""){
+    return `views/pago.html?prodId=${num}&name=${usuarioLogged}`
+  } else {
+    return `views/login.html?prodId=${num}`
+  }
 }

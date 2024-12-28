@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suscripción Básica</title>
+    <title>MAMBA</title>
     <style>
         body {
             margin: 0;
@@ -63,11 +63,104 @@
             position: absolute;
             left: 0;
         }
+        .button-container {
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            background-color: #76c893;
+            color: #121212;
+            border: none;
+            padding: 12px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-container button:hover {
+            background-color: #66b37b;
+        }
+
+        /* Alerta personalizada */
+        .alert-container {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #1e1e1e;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+            text-align: center;
+            z-index: 1000;
+            width: 80%;
+            max-width: 400px;
+            color: #e0e0e0;
+        }
+
+        .alert-container h2 {
+            color: #76c893;
+            margin-bottom: 20px;
+        }
+
+        .alert-container p {
+            margin-bottom: 20px;
+        }
+
+        .alert-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .alert-buttons button {
+            background-color: #76c893;
+            color: #121212;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .alert-buttons button:hover {
+            background-color: #66b37b;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+        }
     </style>
 </head>
 <body>
     <div class="container" id="container">
         
+    </div>
+
+    <div class="alert-container" id="alertContainer">
+        <h2>¿Estás seguro de comprar?</h2>
+        <p>Confirmando la compra, procederás a completar la transacción.</p>
+        <div class="alert-buttons">
+            <button onclick="realizarCompra()">Sí</button>
+            <button onclick="cancelarCompra()">No</button>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="thanks-message" id="thanksMessage" style="display: none;">
+        Gracias por comprar!
     </div>
     <script src="../js/pago.js"></script>
 </body>

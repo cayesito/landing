@@ -1,0 +1,42 @@
+[
+  {
+    "nombre": "Sudadera MAMBA",
+    "id": 1,
+    "descripcion": "Una sudadera ideal para cualquier ocasión. Tiene un diseño unico que te hara ser el centro de atención siempre que la lleves",
+    "precio": 29.99,
+    "image1": "../img/sudadera.png",
+    "image2": "../img/sudadera.png",
+    "image3": "../img/sudadera.png",
+    "stock": 30
+  },
+  {
+    "nombre": "Casco de moto MAMBA",
+    "id": 2,
+    "descripcion": "Uncasco de moto ideal para cualquier ocasión. Tiene un diseño unico que te hara ser el centro de atención siempre que la lleves",
+    "precio": 45.99,
+    "image1": "../img/cascoMoto.png",
+    "image2": "../img/cascoMoto.png",
+    "image3": "../img/cascoMoto.png",
+    "stock": 89
+  },
+  {
+    "nombre": "Bambas MAMBA",
+    "id": 3,
+    "descripcion": "Unas bambas ideales para cualquier ocasión. Tiene un diseño unico que te hara ser el centro de atención siempre que la lleves",
+    "precio": 101.99,
+    "image1": "../img/bambas.png",
+    "image2": "../img/bambas.png",
+    "image3": "../img/bambas.png",
+    "stock": 12
+  },
+  {
+    "nombre": "Logo MAMBA",
+    "id": 4,
+    "descripcion": "Una sudadera ideal para cualquier ocasión. Tiene un diseño unico que te hara ser el centro de atención siempre que la lleves",
+    "precio": 54.01,
+    "image1": "../img/Logo.png",
+    "image2": "../img/Logo.png",
+    "image3": "../img/Logo.png",
+    "stock": 30
+  }
+]

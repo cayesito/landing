@@ -2,16 +2,53 @@
   {
     "usuario": "cayeym",
     "email": "cayetanoym@gmail.com",
-    "password": "12"
+    "password": "ca1",
+    "firstName": "Cayetano",
+    "lastName": "Yeste",
+    "phone": "601216893",
+    "address": "c/Harmonia 23",
+    "city": "Barcelona",
+    "zip": "08030",
+    "tipoSuscripcion": "Premium",
+    "estado": "Activa",
+    "compras": 0,
+    "totalGastado": 0
   },
   {
     "usuario": "cayesito",
     "email": "cayetanoym1999@gmail.com",
-    "password": "23"
+    "password": "12",
+    "firstName": "Cayetano",
+    "lastName": "Yeste",
+    "phone": "",
+    "address": "Barcelona",
+    "city": "",
+    "zip": "",
+    "compras": 0,
+    "tipoSuscripcion": "Básica",
+    "estado": "Activa",
+    "totalGastado": 0
   },
   {
     "usuario": "Cayetano",
     "email": "cayetanoym1999ym@gmail.com",
-    "password": "123456"
+    "password": "123456",
+    "tipoSuscripcion": "Avanzada",
+    "estado": "Dado de baja",
+    "firstName": "Caye",
+    "lastName": "",
+    "phone": "",
+    "address": "",
+    "city": "",
+    "zip": "",
+    "compras": 0,
+    "totalGastado": 0
+  },
+  {
+    "usuario": "cabesa",
+    "email": "cyestem@student.ifp.es",
+    "password": "123",
+    "compras": 0,
+    "totalGastado": 0
   }
 ]

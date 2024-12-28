@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tienda en línea de productos. Compra fácil y rápido.">
+    <title>MAMBA</title>
+    <link rel="stylesheet" href="../css/buy.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>MAMBA</h1>
+            </div>
+            <ul class="menu">
+                <li><a href="" id="homeButton">Inicio</a></li>
+                <li><a href="#">Productos</a></li>
+                <li><a href="" id="contactButton">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="producto">
+            <form id="imageForm">
+                <div class="producto-imagenes">
+                    <div class="carrusel-imagenes">
+                        <img src="" alt="Producto 1" id="image1">
+                        <img src="../img/sudadera.png" alt="Producto 2" id="image2">
+                        <img src="../img/sudadera.png" alt="Producto 3" id="image3">
+                    </div>
+                    <button class="flecha izquierda" onclick="cambiarImagen(-1, event)">&#10094;</button>
+                    <button class="flecha derecha" onclick="cambiarImagen(1, event)">&#10095;</button>
+                </div>
+            </form>
+
+            <form id="prodForm">
+                <div class="producto-detalles">
+                    <h2 id="nombre">Nombre del Producto</h2>
+                    <p class="descripcion" id="descripcion">Descripción detallada del producto aquí. Explicación del uso, materiales y características.</p>
+                    <p class="precio" id="precio">$99.99</p>
+                    <button class="comprar-btn" onclick="mostrarPopUp(event)">Comprar</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <h3>Detalles del Pedido</h3>
+            
+            <label for="cantidad" class="label-cantidad">Cantidad:</label>
+            <div class="input-spinner">
+                <button class="flecha-spinner" onclick="cambiarCantidad(-1)">&#9665;</button>
+                <input type="number" id="cantidad" name="cantidad" value="1" min="1" readonly>
+                <button class="flecha-spinner" onclick="cambiarCantidad(1)">&#9655;</button>
+            </div>
+    
+            <label for="color" class="label-color">Color:</label>
+            <div class="input-color">
+                <select id="color" readonly>
+                    <option value="rojo">Rojo</option>
+                    <option value="azul">Azul</option>
+                    <option value="verde">Verde</option>
+                </select>
+            </div>
+    
+            <div class="popup-buttons">
+                <button class="btn-cancelar" onclick="cerrarPopUp()">Cancelar</button>
+                <button class="btn-pedir" onclick="confirmarPedido()">Confirmar Pedido</button>
+            </div>
+        </div>
+    </div>    
+
+    <footer>
+        <p>&copy; 2024 MAMBA. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="../js/buy.js"></script>
+</body>
+</html>

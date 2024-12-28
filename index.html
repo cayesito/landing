@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="description" content="Landin de nuestro nuevo proyecto mamba">
+
+    <title>MAMBA</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,19 +15,16 @@
     <link rel="icon" type="image/x-icon" href="img/logoMamba.jpg">
 </head>
 <body>
-    <section>
-        <div class="cont" id="primary_text">
-            <div class="row head">
-                <div class="col-sm">
-                    <img src="img/logoMamba.png" alt="icon" class="icon">MAMBA
-                    <h1>
-                        Conoce MAMBA, la marca n#1 para todos tus accesorios!
-                    </h1>
-                </div>
-                <div class="col-sm">
-                    <img src="img/zyrwECDl.jpg" alt="" class="example">
-                </div>
-            </div>
+    <section class="header">
+        <div class="logo">
+            <img src="img/logoMamba.png" alt="MAMBA Logo">
+            <h1>MAMBA</h1>
+        </div>
+        <div class="menu" id="menu">
+            <a href="views/login.html?mode=1">Login</a>
+            <img src="img/agregar-usuario.png" alt="Login Icon">
+            <a href="views/login.html?mode=2">Register</a>
+            <img src="img/agregar.png" alt="Register Icon">
         </div>
     </section>
     <div class="gradient">
@@ -37,7 +36,7 @@
                     <img src="img/1ONDaVOn.png" alt="" class="model">
                 </div>
                 <div class="col-sm">
-                    <h1 class="char">
+                    <h1 class="char h1">
                         DISEÑOS INNOVADORES
                     </h1>
                     <div class="caracteristicas">
@@ -77,19 +76,27 @@
                 <div class="slider">
                     <div class="slides">
                         <div class="slide">
-                            <img src="img/sudadera.png" alt="Slide 1">
+                            <a href="" id="prod1">
+                                <img src="img/sudadera.png" alt="Slide 1">
+                            </a>
                             <div class="caption">Escape the Ordinary</div>
                         </div>
                         <div class="slide">
-                            <img src="img/cascoMoto.png" alt="Slide 2">
+                            <a href="" id="prod2">
+                                <img src="img/cascoMoto.png" alt="Slide 2">
+                            </a>
                             <div class="caption">Experience Great Adventures</div>
                         </div>
                         <div class="slide">
-                            <img src="img/bambas.png" alt="Slide 3">
+                            <a href="" id="prod3">
+                                <img src="img/bambas.png" alt="Slide 3">
+                            </a>
                             <div class="caption">Discover New Horizons</div>
                         </div>
                         <div class="slide">
-                            <img src="img/Logo.png" alt="Slide 4">
+                            <a href="" id="prod4">
+                                <img src="img/Logo.png" alt="Slide 4">
+                            </a>
                             <div class="caption">Start your brand</div>
                         </div>
                     </div>
@@ -110,34 +117,33 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>  
     <section class="three" id="three">
         <div class="prevSub">
-            <header class="headerSub">
-                <h1 class="h1Sub">Forma parte de nuestra familia!</h1>
-              </header>
-            <main class="mainSub">
-                <p class="pSub">En MAMBA, creemos que el éxito se construye en comunidad, y es por eso que queremos invitarte a formar parte de nuestra historia desde el principio. Cada proyecto, cada idea y cada pequeño paso que demos serán posibles gracias al apoyo de clientes y colaboradores como tú.</p>
-        
-                <p class="pSub">Para agradecerte por confiar en nosotros y ayudarnos a crecer, hemos diseñado opciones especiales que se adaptan a tus necesidades. Entre ellas, ofrecemos planes de suscripción con ventajas increíbles que te permitirán acceder a servicios exclusivos, descuentos especiales y una experiencia personalizada que te hará sentir parte de nuestra familia creativa.</p>
-        
-                <h2 class="h2Sub">¿Qué ofrecemos?</h2>
-                <ul class="ulSub">
-                    <li class="liSub">Descuentos especiales en nuestros servicios.</li>
-                    <li class="liSub">Planes flexibles que se ajustan a cualquier presupuesto.</li>
-                    <li class="liSub">Beneficios exclusivos para nuestros suscriptores, como sesiones de asesoramiento creativo y contenido premium.</li>
-                </ul>
-        
-                <p class="pSub">¡Tú también puedes ser parte de este sueño! Crezcamos juntos y hagamos que tus ideas cobren vida con diseños únicos y de calidad.</p>
-        
-                <p class="pSub">Gracias por considerarnos y por ser parte de este viaje. Con tu apoyo, el éxito está a la vuelta de la esquina.</p>
-        
-                <p class="pSub"><strong>¡Hagamos magia juntos!</strong></p>
-        
-                <a class="buttonSub" onclick="mostrarSuscripciones()">¡Descubre nuestras suscripciones!</a>
-            </main>
+            <div class="leftSub">
+                <header class="headerSub">
+                    <h1 class="h1Sub">Forma parte de nuestra familia!</h1>
+                </header>
+            </div>
+            <div class="rightSub">
+                <main class="mainSub">
+                    <p class="pSub">En MAMBA, creemos que el éxito se construye en comunidad, y es por eso que queremos invitarte a formar parte de nuestra historia desde el principio. Cada proyecto, cada idea y cada pequeño paso que demos serán posibles gracias al apoyo de clientes y colaboradores como tú.</p>
+                    <p class="pSub">Para agradecerte por confiar en nosotros y ayudarnos a crecer, hemos diseñado opciones especiales que se adaptan a tus necesidades. Entre ellas, ofrecemos planes de suscripción con ventajas increíbles que te permitirán acceder a servicios exclusivos, descuentos especiales y una experiencia personalizada que te hará sentir parte de nuestra familia creativa.</p>
+                    <h2 class="h2Sub">¿Qué ofrecemos?</h2>
+                    <ul class="ulSub">
+                        <li class="liSub">Descuentos especiales en nuestros servicios.</li>
+                        <li class="liSub">Planes flexibles que se ajustan a cualquier presupuesto.</li>
+                        <li class="liSub">Beneficios exclusivos para nuestros suscriptores, como sesiones de asesoramiento creativo y contenido premium.</li>
+                    </ul>
+                    <p class="pSub">¡Tú también puedes ser parte de este sueño! Crezcamos juntos y hagamos que tus ideas cobren vida con diseños únicos y de calidad.</p>
+                    <p class="pSub">Gracias por considerarnos y por ser parte de este viaje. Con tu apoyo, el éxito está a la vuelta de la esquina.</p>
+                    <p class="pSub"><strong>¡Hagamos magia juntos!</strong></p>
+                    <a class="buttonSub" onclick="mostrarSuscripciones()">¡Descubre nuestras suscripciones!</a>
+                </main>
+            </div>
         </div>
     </section>
+    
     <div class="gradientInvert">
 
     </div>
@@ -145,7 +151,7 @@
         <div class="footer" id="footer">
             <div class="row head noPad">
                 <div class="col-sm">
-                    <h1 class="char2">¡Vamos a hablar!</h1>
+                    <h1 class="char2 h1">¡Vamos a hablar!</h1>
                     <h6 class="text2">Siempre estamos dispuestos a recibir nuevas ideas o encontrar nuevos colaboradores interesados en nuestro proyecto, cualquier cosa que necesites pon aqui tu correo y te contactaremos!</h6>
                     <form id="form">
                         <div class="form__group field">

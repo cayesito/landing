@@ -1,7 +1,3 @@
-/**
- * @param String name
- * @return String
- */
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -9,7 +5,9 @@ function getParameterByName(name) {
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-var prodId = getParameterByName('prodId');
+let prodId = getParameterByName('prodId');
+let mode = getParameterByName('mode')
+let notSub = getParameterByName('notSub')
 let username
 let password
 
@@ -48,21 +46,26 @@ function showLogin() {
         const password2 = document.getElementById('password').value;
 
         if (username2 && password2) {
-            // Solicitar los datos del servidor (usuarios registrados)
             fetch('http://localhost:3000/obtener-datos')
             .then(response => response.json())
             .then(data => {
                 let usuarioValido = false;
 
-                // Compara con los usuarios guardados en datos.json
                 data.forEach(user => {
-                    if (user.usuario === username2 && user.password === password2) {
+                    if (user.usuario === username2 && user.password === password2 || user.email === username2 && user.password === password2) {
                         usuarioValido = true;
-                        window.location.href = "pago.html?prodId=" + prodId + "&name=" + user.usuario;
+                        if(prodId == ""){
+                            window.location.href = "../index.html?name=" + user.usuario
+                        } else{
+                            if(notSub == 1){
+                                window.location.href = "buy.html?prodId=" + prodId + "&name=" + user.usuario;
+                            } else {
+                                window.location.href = "pago.html?prodId=" + prodId + "&name=" + user.usuario;
+                            }
+                        } 
                     }
                 });
 
-                // Si no se encontró el usuario, muestra un mensaje
                 if (!usuarioValido) {
                     showAlert("El usuario y la contraseña no coinciden con los que has creado.", 'error');
                 }
@@ -103,7 +106,6 @@ function showRecoverUser() {
         .then(data => {
             let usuarioValido = false;
 
-            // Compara con los usuarios guardados en datos.json
             data.forEach(user => {
                 if (user.usuario === username2 || user.email === username2) {
                     usuarioValido = true;
@@ -111,7 +113,6 @@ function showRecoverUser() {
                 }
             });
 
-            // Si no se encontró el usuario, muestra un mensaje
             if (!usuarioValido) {
                 showAlert("Ese usuario no existe.", 'error');
             }
@@ -151,20 +152,18 @@ function showRecoverPassword(user){
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ userId, newPassword })  // Asegúrate de que userId y newPassword están bien definidos
+                body: JSON.stringify({ userId, newPassword }) 
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 if(data.error === "samePassword"){
                     showAlert("La contraseña nueva no puede ser la misma que la anterior", "warning")
                 } else {
-                    // Mostrar mensaje de éxito
                     authContainer.innerHTML = `
                     <div class="message">¡Contraseña cambiada con éxito!</div>
                     `;
                     setTimeout(() => {
-                        showLogin(); // Regresar a inicio de sesión después de 2 segundos
+                        showLogin();
                     }, 2000);
                 }
             })
@@ -178,8 +177,13 @@ function showRecoverPassword(user){
     });
 }
 
-// Mostrar la pantalla de inicio de sesión al cargar
-showLogin();
+if(mode == 1){
+    showLogin()
+} else if(mode == 2){
+    showRegister()
+} else {
+    showLogin()
+}
 
 function showRegister() {
     authContainer.innerHTML = `
@@ -234,7 +238,9 @@ function sendInfo(user, mail, pass, btn){
     const datos = {
         usuario: user,
         email: mail,
-        password: pass
+        password: pass,
+        compras: 0,
+        totalGastado: 0
     };
 
     fetch('http://localhost:3000/guardar-datos', {
@@ -246,7 +252,6 @@ function sendInfo(user, mail, pass, btn){
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data)
         if (data.error === 'userAlreadyExists'){
             showAlert("Ese nombre de usuario ya exite, intenta iniciar sesión", "warning")
         } else if(data.error === 'emailAlreadyExists'){

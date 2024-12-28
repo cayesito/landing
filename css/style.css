@@ -1,22 +1,117 @@
-.cont{
-    width: 100vw;
-    height: 40vh;
-    background: black;
+section {
+  padding: 0;
+}
+
+/* Header Styles */
+.header {
+  background: linear-gradient(135deg, #000000, #1a1a1a);
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.header .logo {
+  display: flex;
+  align-items: center;
+}
+
+.header .logo img {
+  height: 50px;
+  margin-right: 15px;
+}
+
+.header .logo h1 {
+  font-family: 'Rock Salt', cursive;
+  font-size: 28px !important;
+  margin: 0;
+}
+
+.header .menu {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header .menu a {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.3s;
+  text-decoration: none;
+  color: white;
+}
+
+a:visited {
+  color: white;  
+  font-family: arial; 
+  text-decoration: none 
+}
+
+.header .menu a:hover {
+  color: #0f9d58;
+}
+
+.header .menu img {
+  height: 30px;
+  cursor: pointer;
+}
+
+.main-text {
+  text-align: center;
+  margin-top: 40px;
+  color: white;
+  font-family: 'Rock Salt', cursive;
+}
+
+.main-text h1 {
+  font-size: 48px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.main-text p {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header {
+      flex-direction: column;
+      text-align: center;
+  }
+
+  .header .menu {
+      margin-top: 15px;
+      gap: 10px;
+  }
+
+  .main-text h1 {
+      font-size: 36px;
+  }
+
+  .main-text p {
+      font-size: 16px;
+  }
 }
 
 .gradient{
   width: 100%;
   height: 30px;
-  background: linear-gradient(black, #76c893);
+  background: linear-gradient(black, #2d3b34);
 }
 
 .gradientInvert{
   width: 100%;
   height: 30px;
-  background: linear-gradient(#76c893, black);
+  background: linear-gradient(#2d3b34, black);
 }
 
-h1{
+.h1{
     padding-top: 30px;
     font-size: 40px;
     font-family: RockSalt, sans-serif;
@@ -41,15 +136,7 @@ h1{
 }
 
 .one{
-  background-color: #76c893;
-}
-
-.example{
-    position: absolute;
-    right: 0%;
-    margin-right: 10vw;
-    width: 400px;
-    height: 250px;
+  background-color: #2d3b34;
 }
 
 body{
@@ -231,272 +318,367 @@ input:focus::placeholder {
     padding-top: 0px !important;
 }
 
-
 .sliderCont {
-    margin-top: 30px;
-    font-family: 'RockSalt', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: rgb(0, 0, 0);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #2c3e50, #000);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: 'RockSalt', sans-serif;
 }
 
-  .slider-container {
-    width: 650px;
-    display: flex;
+.slider-container {
+  width: 650px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.slider {
+  position: relative;
+  width: 415px;
+  height: 553px;
+  overflow: hidden;
+  border-radius: 12px; /* Más moderno */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Sombra más prominente */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave para el slider */
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out; /* Deslizamiento más suave */
+}
+
+.slide {
+  min-width: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.caption {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px; /* Ajuste para no estar pegado al borde */
+  background: rgba(0, 0, 0, 0.5); /* Fondo oscuro semi-transparente */
+  color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 1.2rem; /* Tamaño de texto más grande */
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Suavizar la animación de entrada y salida */
+  transform: translateY(10px); /* Desplazar el caption ligeramente hacia abajo al principio */
+  opacity: 0; /* Inicialmente oculto */
+}
+
+.slider:hover {
+  transform: scale(1.05); /* Aumenta ligeramente el tamaño del slider */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada */
+}
+
+/* Efecto para el caption cuando el slider está en hover */
+.slider:hover .caption {
+  opacity: 1; /* Asegurarse de que el caption sea visible */
+  transform: translateY(0); /* Asegurarse de que el caption se mueva hacia su posición final */
+}
+
+.slider:not(:hover) .caption {
+  opacity: 0; /* El caption se oculta de forma suave */
+  transform: translateY(10px); /* El caption se mueve hacia abajo de forma suave */
+}
+
+.slider:not(:hover) {
+  transform: scale(1); /* Vuelve a su tamaño original */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave cuando no está en hover */
+}
+
+.thumbnails {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 15px; /* Espacio uniforme entre miniaturas */
+}
+
+.thumbnail {
+  width: 100px;
+  height: 100px;
+  margin: 0 10px;
+  cursor: pointer;
+  border: 2px solid transparent; /* Elimina el borde blanco */
+  border-radius: 5px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: transparent; /* Asegura que el fondo sea transparente */
+}
+
+.thumbnail.active {
+  border-color: #4caf50; /* Color activo de borde */
+}
+
+.thumbnail:hover {
+  transform: scale(1.1);
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+section{
+  scroll-snap-align: start;
+}
+
+html{
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+.newCont {
+  background: linear-gradient(135deg, #1a1a1a, #2d3b34);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ocupa toda la pantalla */
+  padding: 0 20px;
+  margin: 0; /* Elimina márgenes */
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* Título principal */
+.planText.h1 {
+  font-family: 'RockSalt', cursive;
+  font-size: 2.5rem;
+  color: #D4AF37; /* Dorado */
+  margin-bottom: 40px;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Contenedor de planes */
+.plans {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Estilo de cada plan */
+.plan {
+  background: #333333;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  padding: 30px 20px;
+  width: 300px;
+  max-width: 100%;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.plan:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* Título del plan */
+.plan h2 {
+  font-size: 1.8rem;
+  color: #D4AF37; /* Dorado */
+  margin-bottom: 15px;
+  font-family: 'Roboto', sans-serif;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Descripción del plan */
+.plan p {
+  font-size: 1rem;
+  color: #e0e0e0;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* Precio del plan */
+.plan .price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #76c893; /* Verde suave */
+  margin-bottom: 25px;
+}
+
+/* Botón de suscripción */
+.buttonPlan {
+  display: inline-block;
+  background: linear-gradient(45deg, #4CAF50, #76c893);
+  color: #ffffff;
+  padding: 10px 20px;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 8px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.buttonPlan:hover {
+  background: linear-gradient(45deg, #76c893, #4CAF50);
+  transform: scale(1.1);
+}
+
+.buttonPlan:active {
+  transform: scale(1);
+}
+
+/* Diseño responsivo */
+@media (max-width: 768px) {
+  .plans {
     flex-direction: column;
     align-items: center;
   }
 
-  .slider {
-    position: relative;
-    width: 415px;
-    height: 553px;
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  .plan {
+    width: 90%;
   }
 
-  .slides {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
+  .planText.h1 {
+    font-size: 2rem;
   }
-
-  .slide {
-    min-width: 100%;
-    box-sizing: border-box;
-    position: relative;
-  }
-
-  .slide img {
-    width: 415px;
-    height: 553px;
-    object-fit: cover;
-    display: block;
-  }
-
-  .caption {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    background: rgba(0, 0, 0, 0.8);
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 16px;
-  }
-
-  .thumbnails {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-
-  .thumbnail {
-    width: 100px;
-    height: 100px;
-    margin: 0 10px;
-    cursor: pointer;
-    border: 2px solid transparent;
-    border-radius: 5px;
-    overflow: hidden;
-    flex-shrink: 0;
-  }
-
-  .thumbnail img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .thumbnail.active {
-    border-color: black;
-  }
-
-  section{
-    scroll-snap-align: start;
-  }
-
-  html{
-    scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
-  }
-
-.newCont {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    color: #333;
-    background-color: #76c893;
 }
 
-.planContainer {
-    text-align: center;
-    max-width: 1400px;
-    margin: 20px;
+.prevSub {
+  background: #2d3b34;
+  padding-bottom: 60px;
+  line-height: 1.5;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Centrar contenido verticalmente */
+  height: 100vh; /* Asegurar que la sección ocupe todo el alto de la página */
+  padding: 0 20px;
+  overflow: hidden; /* Evitar el scroll */
 }
 
-.planText {
-    font-size: 40px;
-    color: black;
-    margin-bottom: 40px;
+/* Sección principal */
+.mainSub {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: #ffffff;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  color: #333333;
+  font-size: 1.1rem;
+  max-height: 90vh; /* Limitar la altura máxima de la sección */
+  overflow-y: auto; /* Agregar scroll solo si es necesario */
 }
 
-.plans {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    gap: 30px;
+/* Estilos de los párrafos */
+.pSub {
+  margin: 1.5rem 0;
+  font-size: 1rem;
+  color: #555555;
 }
 
-.plan {
-  background: linear-gradient(145deg, #2E2E2E, rgb(27, 27, 27));
-    border-radius: 12px;
-    padding: 35px;
-    width: 280px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
+/* Estilo de los subtítulos */
+.h2Sub {
+  color: #5f6366;
+  margin-top: 2rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 
-.plan:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
-}
-
-.plan h2 {
-    font-size: 32px;
-    color: #D4AF37;
-    margin-bottom: 15px;
-    font-family: 'RockSalt';
-}
-
-.plan p {
-    font-size: 16px;
-    color: #555;
-    margin-bottom: 25px;
-    font-family: 'RockSalt';
-    color: #D4AF37;
-}
-
-.price {
-    font-size: 28px;
-    font-weight: bold;
-    color: #6a1b9a;
-    margin-bottom: 20px;
-    font-family: 'RockSalt';
-    color: #D4AF37;
-}
-
-.buttonPlan {
-    display: inline-block;
-    background: linear-gradient(45deg, #76c893, #1b4329);
-    color: black;
-    padding: 12px 25px;
-    font-size: 16px;
-    text-decoration: none;
-    border-radius: 8px;
-    transition: background 0.3s ease, transform 0.3s ease;
-    font-family: 'RockSalt';
-}
-
-.buttonPlan:hover {
-    background: linear-gradient(45deg, #1b4329, #76c893);
-    transform: scale(1.05);
-}
-
-.buttonPlan:active {
-    transform: scale(1);
-}
-
-.prevSub{
-  font-family: 'RockSalt';
-  margin: 0;
-  padding: 0;
-  background:  #76c893;
-  line-height: 1.2;
-  padding-bottom: 80px;
-  
-}
-
-.mainSub{
-  max-width: 1200px;
-  margin: 2rem auto;
-  margin-top: 0rem;
-  margin-bottom: 0rem;
-  padding: 1rem;
-  background: #2E2E2E;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-}
-
-.pSub{
-  margin: 1rem 0;
-  color: #F4EDE4;
-}
-
-.h2Sub{
-  color: #D4AF37;
-  margin-top: 1rem;
-}
-
-.ulSub{
+/* Estilo de la lista */
+.ulSub {
   list-style-type: none;
   padding: 0;
+  margin-bottom: 1rem;
 }
 
-.ulSub .liSub{
-  background: #3A6351;
+.ulSub .liSub {
+  background: #f1f1f1;
   margin: 0.5rem 0;
-  padding: 0.5rem;
-  border-radius: 5px;
-  color: #D4AF37;
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  color: #333333;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.liSub:hover{
-  background: #2E4B40;
-  color: #B89829;
+.liSub:hover {
+  background: #e0e0e0;
+  transform: translateY(-5px);
 }
 
+/* Estilo del botón */
 .buttonSub {
   display: block;
-  background: #3A6351;
-  color: #D4AF37;
-  padding: 0.8rem 1.2rem;
+  background: #4caf50;
+  color: #ffffff;
+  padding: 1rem 2rem;
   text-decoration: none;
   font-weight: bold;
-  border-radius: 5px;
-  margin: 1rem auto;
-  transition: background 0.3s;
+  border-radius: 6px;
+  margin: 2rem auto 0;
   text-align: center;
   width: fit-content;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 .buttonSub:hover {
-  background: #2E4B40;
-  color: #B89829;
+  background: #45a049;
+  transform: translateY(-3px);
 }
 
+/* Estilo del encabezado */
 .headerSub {
-  background-color: #3A6351; /* Verde oscuro profundo */
-  color: #F4EDE4; /* Beige claro para el título */
-  padding: 20px;
+  background-color: #3a3f44; /* Gris oscuro */
+  color: #ffffff; /* Blanco para el texto */
+  padding: 30px 20px;
   text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  margin-bottom: 40px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  margin-bottom: 50px;
+  border-radius: 12px;
+  width: 100%;
+  
 }
 
 .headerSub .h1Sub {
-  font-size: 28px;
+  font-size: 2.4rem;
   font-weight: bold;
   margin: 0;
-  color: #D4AF37;
+  color: #ffffff;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .mainSub {
+      padding: 1.5rem;
+      max-height: none; /* En pantallas más pequeñas, el contenido puede ocupar toda la altura */
+  }
+
+  .ulSub .liSub {
+      padding: 1rem;
+  }
+
+  .buttonSub {
+      padding: 1rem 1.5rem;
+  }
 }
