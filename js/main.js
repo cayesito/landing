@@ -15,6 +15,99 @@ const usuarioLogged = getParameterByName("name")
 let menu = document.getElementById("menu")
 
 document.addEventListener('DOMContentLoaded', function() {
+  let currentIndex = 0;
+  const images = [
+    { src: "img/sudadera.png", caption: "Escape the Ordinary" },
+    { src: "img/cascoMoto.png", caption: "Experience Great Adventures" },
+    { src: "img/bambas.png", caption: "Discover New Horizons" },
+    { src: "img/Logo.png", caption: "Start your brand" },
+  ];
+
+  const slidesContainer = document.querySelector(".slides");
+  const thumbnailsContainer = document.querySelector(".thumbnails");
+  let autoSlideInterval;
+
+  // Generar contenido dinámicamente
+  const createSlidesAndThumbnails = () => {
+    slidesContainer.innerHTML = "";
+    thumbnailsContainer.innerHTML = "";
+
+    images.forEach((image, index) => {
+      // Crear slide
+      const slide = document.createElement("div");
+      slide.classList.add("slide");
+      slide.innerHTML = `
+        <a href="#" id="prod${index + 1}">
+          <img src="${image.src}" alt="Slide ${index + 1}">
+        </a>
+        <div class="caption">${image.caption}</div>
+      `;
+      slidesContainer.appendChild(slide);
+
+      // Crear miniatura
+      const thumbnail = document.createElement("div");
+      thumbnail.classList.add("thumbnail");
+      thumbnail.innerHTML = `<img src="${image.src}" alt="Thumbnail ${index + 1}">`;
+      thumbnail.addEventListener("click", () => {
+        goToSlide(index);
+        restartAutoSlide();
+      });
+      thumbnailsContainer.appendChild(thumbnail);
+    });
+  };
+
+  // Cambiar a la imagen correspondiente al índice
+  const goToSlide = (index) => {
+    if (index < 0) {
+      currentIndex = images.length - 1;
+    } else if (index >= images.length) {
+      currentIndex = 0;
+    } else {
+      currentIndex = index;
+    }
+
+    // Cambiar a la imagen correspondiente sin animación
+    slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+    updateThumbnails();
+  };
+
+  // Actualizar las miniaturas según la imagen activa
+  const updateThumbnails = () => {
+    const thumbnails = document.querySelectorAll(".thumbnail");
+    thumbnails.forEach((thumb, i) => {
+      thumb.classList.toggle("active", i === currentIndex);
+    });
+  };
+
+  // Iniciar el deslizador automático
+  const startAutoSlide = () => {
+    autoSlideInterval = setInterval(() => {
+      goToSlide(currentIndex + 1);
+    }, 5000); // Cambia cada 5 segundos
+  };
+
+  // Reiniciar el deslizador automático al interactuar con las miniaturas
+  const restartAutoSlide = () => {
+    clearInterval(autoSlideInterval);
+    startAutoSlide();
+  };
+
+  // Soporte para teclas de navegación
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") {
+      goToSlide(currentIndex + 1);
+      restartAutoSlide();
+    } else if (e.key === "ArrowLeft") {
+      goToSlide(currentIndex - 1);
+      restartAutoSlide();
+    }
+  });
+
+  // Inicializar
+  createSlidesAndThumbnails();
+  goToSlide(0);
+  startAutoSlide();
+
   const productButton1 = document.getElementById("prod1");
   const productButton2 = document.getElementById("prod2");
   const productButton3 = document.getElementById("prod3");
@@ -88,79 +181,6 @@ window.addEventListener('scroll', function() {
   // Actualizar la última posición del scroll
   lastScrollTop = scrollPosition <= 0 ? 0 : scrollPosition; // Evitar valores negativos
 });*/
-
-document.addEventListener("DOMContentLoaded", () => {
-  let currentIndex = 0;
-  const slides = document.querySelector(".slides");
-  const slideCount = document.querySelectorAll(".slide").length;
-  const thumbnails = document.querySelectorAll(".thumbnail");
-  let autoSlideInterval;
-
-  // Función para ir a un slide específico
-  const goToSlide = (index) => {
-    // Asegúrate de que el índice esté dentro del rango
-    if (index < 0) {
-      currentIndex = slideCount - 1; // Ir al último slide
-      slides.style.transition = "none"; // Desactivar la transición
-      slides.style.transform = `translateX(-${currentIndex * 100}%)`; // Mover a la última imagen
-      setTimeout(() => {
-        slides.style.transition = "transform 0.5s ease-in-out"; // Reactivar la transición
-      }, 50);
-    } else if (index >= slideCount) {
-      currentIndex = 0; // Volver al primer slide
-      slides.style.transition = "none"; // Desactivar la transición
-      slides.style.transform = `translateX(0)`;
-      setTimeout(() => {
-        slides.style.transition = "transform 0.5s ease-in-out"; // Reactivar la transición
-      }, 50);
-    } else {
-      currentIndex = index;
-      slides.style.transform = `translateX(-${currentIndex * 100}%)`; // Mover al slide deseado
-    }
-
-    // Actualizar miniaturas
-    thumbnails.forEach((thumb, i) => {
-      thumb.classList.toggle("active", i === currentIndex);
-      thumb.setAttribute("aria-selected", i === currentIndex);
-    });
-  };
-
-  // Función para iniciar el auto-slide
-  const startAutoSlide = () => {
-    autoSlideInterval = setInterval(() => {
-      goToSlide((currentIndex + 1) % slideCount);
-    }, 5000);
-  };
-
-  // Función para reiniciar el temporizador del auto-slide
-  const restartAutoSlide = () => {
-    clearInterval(autoSlideInterval);
-    startAutoSlide();
-  };
-
-  // Configurar eventos de clic en miniaturas
-  thumbnails.forEach((thumb, index) => {
-    thumb.addEventListener("click", () => {
-      goToSlide(index);
-      restartAutoSlide();
-    });
-  });
-
-  // Soporte para teclas de navegación
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowRight") {
-      goToSlide((currentIndex + 1) % slideCount);
-      restartAutoSlide();
-    } else if (e.key === "ArrowLeft") {
-      goToSlide((currentIndex - 1 + slideCount) % slideCount);
-      restartAutoSlide();
-    }
-  });
-
-  // Iniciar auto-slide
-  goToSlide(0); // Configurar el primer slide como activo
-  startAutoSlide();
-});
 
 function mostrarSuscripciones(){
   let subBody = document.getElementById("three")

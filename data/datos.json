@@ -4,15 +4,15 @@
     "email": "cayetanoym@gmail.com",
     "password": "ca1",
     "firstName": "Cayetano",
-    "lastName": "Yeste",
+    "lastName": "Yeste Morant",
     "phone": "601216893",
     "address": "c/Harmonia 23",
     "city": "Barcelona",
     "zip": "08030",
-    "tipoSuscripcion": "Básica",
+    "tipoSuscripcion": "Premium",
     "estado": "Activa",
-    "compras": 0,
-    "totalGastado": 0
+    "compras": 1,
+    "totalGastado": 89.97
   },
   {
     "usuario": "cayesito",
@@ -47,6 +47,13 @@
   {
     "usuario": "cabesa",
     "email": "cyestem@student.ifp.es",
+    "password": "123",
+    "compras": 0,
+    "totalGastado": 0
+  },
+  {
+    "usuario": "Ivan",
+    "email": "ivanordonez2013@gmail.com",
     "password": "123",
     "compras": 0,
     "totalGastado": 0

@@ -15,20 +15,20 @@
             </div>
             <ul class="menu">
                 <li><a href="" id="homeButton">Inicio</a></li>
-                <li><a href="#">Productos</a></li>
+                <li><a href="" id="productosButton">Productos</a></li>
                 <li><a href="" id="contactButton">Contacto</a></li>
             </ul>
         </nav>
     </header>
 
-    <main>
+    <main id="mainContent">
         <div class="producto">
             <form id="imageForm">
                 <div class="producto-imagenes">
                     <div class="carrusel-imagenes">
                         <img src="" alt="Producto 1" id="image1">
-                        <img src="../img/sudadera.png" alt="Producto 2" id="image2">
-                        <img src="../img/sudadera.png" alt="Producto 3" id="image3">
+                        <img src="" alt="Producto 2" id="image2">
+                        <img src="" alt="Producto 3" id="image3">
                     </div>
                     <button class="flecha izquierda" onclick="cambiarImagen(-1, event)">&#10094;</button>
                     <button class="flecha derecha" onclick="cambiarImagen(1, event)">&#10095;</button>
@@ -71,11 +71,21 @@
                 <button class="btn-pedir" onclick="confirmarPedido()">Confirmar Pedido</button>
             </div>
         </div>
-    </div>    
+    </div>
+
+    <div id="productosContainer" style="display: none;">
+        
+    </div>
 
     <footer>
         <p>&copy; 2024 MAMBA. Todos los derechos reservados.</p>
     </footer>
+
+    <div id="custom-alert" class="alert">
+        <div class="alert-icon" id="alert-icon"></div>
+        <div id="alert-message"></div>
+        <button class="close-btn" onclick="closeAlert()">×</button>
+    </div>
 
     <script src="../js/buy.js"></script>
 </body>

@@ -420,14 +420,13 @@ app.put('/comprar', (req, res) => {
                     }
                     
                     usuario.totalGastado += producto.precio * parseFloat(content.nuevosDatos.cantidad)
-                    console.log(producto.precio * parseFloat(content.nuevosDatos.cantidad))
 
                     // Verificar si hay suficiente stock
                     if (producto.stock >= parseInt(content.nuevosDatos.cantidad)) {
                         producto.stock -= parseInt(content.nuevosDatos.cantidad); // Reducir el stock
                     } else {
                         return res.status(500).json({
-                            error: `Lo lamentamos, tan solo nos quedan ${producto.stock}. Le avisaremos cuando ampliemos stock.`
+                            error: `Lo lamentamos, tan solo nos quedan ${producto.stock} ${producto.nombre}. Le avisaremos cuando ampliemos stock.`
                         });
                     }
     
@@ -459,6 +458,23 @@ app.put('/comprar', (req, res) => {
         } catch (parseError) {
             console.error('Error al parsear el JSON de usuarios:', parseError);
             res.status(500).json({ error: 'Error al procesar los datos de usuarios.' });
+        }
+    });
+});
+
+app.get('/allProductos', (req, res) => {
+    fs.readFile('./data/prod.json', 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error al leer el archivo:', err);
+            return res.status(500).json({ mensaje: 'Error al leer los datos' });
+        }
+
+        try {
+            const usuarios = JSON.parse(data);
+            res.json(usuarios); 
+        } catch (parseError) {
+            console.error('Error al parsear el archivo JSON:', parseError);
+            return res.status(500).send('Error al parsear los datos');
         }
     });
 });
