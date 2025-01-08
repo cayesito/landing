@@ -2,6 +2,15 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.21.2",
-    "multer": "^1.4.5-lts.1"
+    "multer": "^1.4.5-lts.1",
+    "homepage": "https://cayesito.github.io/landing/"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
+  },
+  "scripts": {
+  "build": "npm run node server.js",
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d build"
   }
 }
