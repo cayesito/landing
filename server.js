@@ -2,7 +2,7 @@ const express = require('express');
 const fs = require('fs');
 const app = express();
 const cors = require('cors'); // Importa el paquete cors
-const PORT = 3000;
+const PORT = 5000;
 
 // Middleware para habilitar CORS
 app.use(cors());
@@ -482,5 +482,5 @@ app.use(express.static('.'));
 
 // Iniciar el servidor
 app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+    console.log(`Servidor corriendo en ${PORT}`);
 });
