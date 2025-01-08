@@ -1,16 +1,21 @@
+
 {
+  "name": "landing",
+  "version": "1.0.0",
+  "description": "Proyecto de landing para clase",
+  "homepage": "https://cayesito.github.io/landing/",
+  "main": "index.js",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.21.2",
-    "multer": "^1.4.5-lts.1",
-    "homepage": "https://cayesito.github.io/landing/"
+    "multer": "^1.4.5-lts.1"
   },
   "devDependencies": {
     "gh-pages": "^6.3.0"
   },
   "scripts": {
-  "build": "node server.js",
-  "predeploy": "npm run build",
-  "deploy": "gh-pages -d build"
+    "build": "node server.js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   }
 }
