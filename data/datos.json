@@ -6,13 +6,13 @@
     "firstName": "Cayetano",
     "lastName": "Yeste Morant",
     "phone": "601216893",
-    "address": "c/Harmonia 23",
+    "address": "c/Harmonia 28",
     "city": "Barcelona",
     "zip": "08030",
-    "tipoSuscripcion": "Premium",
+    "tipoSuscripcion": "Avanzada",
     "estado": "Activa",
-    "compras": 1,
-    "totalGastado": 89.97
+    "compras": 3,
+    "totalGastado": 683.8
   },
   {
     "usuario": "cayesito",
@@ -57,5 +57,18 @@
     "password": "123",
     "compras": 0,
     "totalGastado": 0
+  },
+  {
+    "usuario": "Alex",
+    "email": "alex.cortell.ifp@gmail.com",
+    "password": "12345",
+    "compras": 6,
+    "totalGastado": 275.94,
+    "firstName": "Alex",
+    "lastName": "",
+    "phone": "",
+    "address": "",
+    "city": "",
+    "zip": ""
   }
 ]

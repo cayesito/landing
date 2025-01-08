@@ -52,6 +52,20 @@
             </form>
         </div>
 
+        <div class="section" id="dissapearCompras">
+            <h2>Compras</h2>
+            <form id="buyForm">
+                <div class="form-group">
+                    <label for="compras">Compras:</label>
+                    <input type="text" id="compras" name="compras" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="totalGastado">Total gastado:</label>
+                    <input type="text" id="totalGastado" name="totalGastado" disabled>
+                </div>
+            </form>
+        </div>
+
         <div class="section">
             <h2>Contraseña</h2>
             <form id="passwordForm">
@@ -90,9 +104,9 @@
     <div id="confirmationPopup" class="popup" style="display: none;">
         <div class="popup-overlay" onclick="cerrarPopup()"></div>
         <div class="popup-content" id="popupContent">
-            <h3>¿Estás seguro que deseas dar de baja tu suscripción?</h3>
+            <h3 id="suscriptionText"></h3>
             <div class="button-container">
-                <button onclick="darDeBaja()">Sí, dar de baja</button>
+                <button onclick="darDeBaja()" id="confirmButton"></button>
                 <button onclick="cerrarPopup()">Cancelar</button>
             </div>
         </div>

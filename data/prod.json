@@ -7,7 +7,7 @@
     "image1": "../img/sudadera.png",
     "image2": "../img/sudadera.png",
     "image3": "../img/sudadera.png",
-    "stock": 27
+    "stock": 9
   },
   {
     "nombre": "Casco de moto MAMBA",
@@ -17,7 +17,7 @@
     "image1": "../img/cascoMoto.png",
     "image2": "../img/cascoMoto.png",
     "image3": "../img/cascoMoto.png",
-    "stock": 89
+    "stock": 83
   },
   {
     "nombre": "Bambas MAMBA",
@@ -37,6 +37,6 @@
     "image1": "../img/Logo.png",
     "image2": "../img/Logo.png",
     "image3": "../img/Logo.png",
-    "stock": 30
+    "stock": 29
   }
 ]

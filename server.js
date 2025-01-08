@@ -400,8 +400,6 @@ app.put('/comprar', (req, res) => {
                 return res.status(404).json({ error: 'Usuario no encontrado.' });
             }
     
-            usuario.compras += 1;
-    
             fs.readFile(filePathProd, 'utf8', (err, dataProd) => {
                 if (err) {
                     console.error('Error al leer el archivo JSON de productos:', err);
@@ -420,6 +418,7 @@ app.put('/comprar', (req, res) => {
                     }
                     
                     usuario.totalGastado += producto.precio * parseFloat(content.nuevosDatos.cantidad)
+                    usuario.compras += 1;
 
                     // Verificar si hay suficiente stock
                     if (producto.stock >= parseInt(content.nuevosDatos.cantidad)) {
@@ -443,7 +442,6 @@ app.put('/comprar', (req, res) => {
                                 console.error('Error al escribir en el archivo JSON de productos:', err);
                                 return res.status(500).json({ error: 'Error al guardar los datos de productos.' });
                             }
-    
                             // Todo ha salido bien, respondemos al cliente
                             res.status(200).json({ message: 'Compra realizada con éxito.' });
                         });

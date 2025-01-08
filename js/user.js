@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
         populateForm("personalInfoForm", data);
         populateForm("addressForm", data);
         populateForm("subForm",data)
+        populateForm("buyForm",data)
         
         allData = data
 
@@ -40,6 +41,22 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             let dis = document.getElementById("dissapear")
             dis.innerHTML = ""
+        } 
+        
+        if(allData.compras === 1){
+            let dis = document.getElementById("dissapearCompras")
+            dis.innerHTML = ""
+        }
+        
+        let textSub = document.getElementById("suscriptionText")
+        let confirmButton = document.getElementById("confirmButton")
+
+        if(allData.estado === "Activa"){
+            textSub.innerHTML = "Lo lamentamos, esperamos que vuelva a usar nuestros servicios pronto.";
+            confirmButton.innerHTML = "Sí, dar de baja"
+        } else {
+            textSub.innerHTML = "Nos alegra que vuelva a confiar en nostros, bienvenido de vuelta.";
+            confirmButton.innerHTML = "Sí, resuscribirse"
         }
     })
     .catch(error => {
@@ -114,7 +131,6 @@ function confirmarBaja() {
 function darDeBaja() {
     const popupContent = document.getElementById("popupContent");
     let datosUpdate = ""
-    popupContent.innerHTML = "<h3>Lo lamentamos, esperamos que vuelva a usar nuestros servicios pronto.</h3>";
 
     if(allData.estado === "Activa"){
         datosUpdate = {

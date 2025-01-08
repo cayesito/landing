@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log(tarjeta)
 
             tarjeta.addEventListener('click', () => {
-                const urlProducto = `file:///C:/Users/cayet/Desktop/Proyectos/landing/views/buy.html?prodId=${producto.id}&name=${userLogged}`;
+                const urlProducto = `../views/buy.html?prodId=${producto.id}&name=${userLogged}`;
                 window.location.href = urlProducto;
             });
 
@@ -140,10 +140,10 @@ function confirmarPedido() {
     })
     .then(response => response.json())
     .then(data => {
-        if(data.error !== ""){
-            console.log(data.error)
+        if(data.error == 'undefined'){
             showAlert(data.error, "warning")
         } else{
+            showAlert("Muchas gracias por su compra!", 'success')
             cerrarPopUp();
         }
     })
