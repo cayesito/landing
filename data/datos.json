@@ -57,18 +57,5 @@
     "password": "123",
     "compras": 0,
     "totalGastado": 0
-  },
-  {
-    "usuario": "Alex",
-    "email": "alex.cortell.ifp@gmail.com",
-    "password": "12345",
-    "compras": 6,
-    "totalGastado": 275.94,
-    "firstName": "Alex",
-    "lastName": "",
-    "phone": "",
-    "address": "",
-    "city": "",
-    "zip": ""
   }
 ]
