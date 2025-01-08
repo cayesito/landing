@@ -9,7 +9,7 @@
     "gh-pages": "^6.3.0"
   },
   "scripts": {
-  "build": "npm run node server.js",
+  "build": "node server.js",
   "predeploy": "npm run build",
   "deploy": "gh-pages -d build"
   }
