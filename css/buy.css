@@ -399,13 +399,12 @@ input[type=number] { -moz-appearance:textfield; }
 }
 
 
-/* Animación de cierre */
 .alert.close {
-    opacity: 0; /* Desaparece con la animación */
-    visibility: hidden; /* Hace invisible la alerta */
-    transform: translate(-50%, -50%) translateY(-20px); /* Aplica la animación de cierre */
-    transition: opacity 0.4s ease, transform 0.3s ease; /* Asegura que la animación de cierre sea suave */
-    pointer-events: none; /* Desactiva los eventos cuando la alerta está cerrada */
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, -50%) translateY(-20px);
+    transition: opacity 0.4s ease, transform 0.3s ease;
+    pointer-events: none;
 }
 
 #productosContainer {
@@ -415,7 +414,7 @@ input[type=number] { -moz-appearance:textfield; }
     gap: 30px;
     padding: 20px;
     margin-top: 30px;
-    background-color: #1a1a1a; /* Fondo de la sección */
+    background-color: #1a1a1a;
 }
 
 #productosContainer .producto {

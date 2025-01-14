@@ -54,30 +54,31 @@ function getParameterByName(name) {
     subBody.innerText = ""
     subBody.innerHTML = `
     <div class='newCont'>
-      <div class='planContainer'>
-      <h1 class='planText h1'>Escoge tu plan de suscripción</h1>
-        <div class='plans'>
-          <div class='plan'>
-            <h2>Basico</h2>
-            <p>Envios gratuitos y un descuento del 10% en uno de nuestros productos mensualmente.</p>
-            <p class='price'>5€ / mes</p>
-            <a href='${alredyLogged(1)}' class='buttonPlan'>Suscribete</a>
-          </div>
-          <div class='plan'>
-            <h2>Avanzado</h2>
-            <p>Un produco gratuito a su eleccion y un descuento del 50% en cualquier compra mensual.</p>
-            <p class='price'>15€ / month</p>
-            <a href='${alredyLogged(2)}' class='buttonPlan'>Suscribete</a>
-          </div>
-          <div class='plan'>
-            <h2>Premium</h2>
-            <p>Lo mismo que en el avanzado pero añadiendo un 50% de descuento en todos los nuevos productos</p>
-            <p class='price'>30€ / month</p>
-            <a href='${alredyLogged(3)}' class='buttonPlan'>Suscribete</a>
-          </div>
+        <div class='planContainer'>
+            <h1 class='planText h1'>Choose Your Subscription Plan</h1>
+            <div class='plans'>
+            <div class='plan'>
+                <h2>Basic</h2>
+                <p>Free shipping and a 10% discount on one of our products each month all year.</p>
+                <p class='price'>5,15$ / month</p>
+                <a href='${alredyLogged(1)}' class='buttonPlan'>Subscribe</a>
+            </div>
+            <div class='plan'>
+                <h2>Advanced</h2>
+                <p>One free product of your choice and a 50% discount on any monthly purchase.</p>
+                <p class='price'>15,46$ / month</p>
+                <a href='${alredyLogged(2)}' class='buttonPlan'>Subscribe</a>
+            </div>
+            <div class='plan'>
+                <h2>Premium</h2>
+                <p>Everything included in the Advanced plan plus a 50% discount on all new products.</p>
+                <p class='price'>30,91$ / month</p>
+                <a href='${alredyLogged(3)}' class='buttonPlan'>Subscribe</a>
+            </div>
+            </div>
         </div>
-      </div>
     </div>
+
     `
   }
     

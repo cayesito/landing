@@ -169,46 +169,36 @@ function cerrarPopup() {
     location.reload()
 }
 
-// Función para mostrar la alerta
 function showAlert(message, type = 'error') {
     const alertBox = document.getElementById('custom-alert');
     const alertMessage = document.getElementById('alert-message');
     const alertIcon = document.getElementById('alert-icon');
 
-    // Establecer el mensaje en la alerta
     alertMessage.textContent = message;
 
-    // Limpiar clases previas
     alertBox.classList.remove('error', 'success', 'warning');
-    alertIcon.textContent = ''; // Limpiar icono previo
+    alertIcon.textContent = '';
 
-    // Agregar la clase correspondiente para el tipo de alerta
     alertBox.classList.add(type);
 
-    // Cambiar el icono según el tipo de alerta
     if (type === 'error') {
-        alertIcon.innerHTML = '❌';  // Icono de error
+        alertIcon.innerHTML = '❌';
     } else if (type === 'success') {
-        alertIcon.innerHTML = '✅';  // Icono de éxito
+        alertIcon.innerHTML = '✅'; 
     } else if (type === 'warning') {
-        alertIcon.innerHTML = '⚠️';  // Icono de advertencia
+        alertIcon.innerHTML = '⚠️';
     }
 
-    // Mostrar la alerta con animación
     alertBox.classList.add('show');
-    alertBox.style.display = "flex";  // Asegurarse de que el display sea flex cuando se muestre
+    alertBox.style.display = "flex"; 
 }
 
-// Función para cerrar la alerta con animación
 function closeAlert() {
     const alertBox = document.getElementById('custom-alert');
-
-    // Inicia la animación de cierre
     alertBox.classList.add('close');
 
-    // Espera a que la animación de opacidad termine para poner display: none
     setTimeout(() => {
-        alertBox.style.display = 'none';  // Después de la animación, oculta el elemento
-        alertBox.classList.remove('close');  // Limpia la clase para futuras animaciones
-    }, 400); // El tiempo debe coincidir con la duración de la animación
+        alertBox.style.display = 'none';
+        alertBox.classList.remove('close');
+    }, 400);
 }
