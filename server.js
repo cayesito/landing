@@ -1,11 +1,22 @@
 const express = require('express');
 const fs = require('fs');
+const path = require('path');
 const app = express();
 const cors = require('cors'); // Importa el paquete cors
-const PORT = 3000;
+const port = 3000;
 
 // Middleware para habilitar CORS
 app.use(cors());
+
+app.use(express.static(path.join(__dirname, 'landing')));
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'landing', 'index.html'));
+});
+
+app.listen(port, () => {
+    console.log(`Servidor corriendo en http://localhost:${port}`);
+});
 
 // Middleware para manejar datos JSON
 app.use(express.json());
@@ -475,12 +486,4 @@ app.get('/allProductos', (req, res) => {
             return res.status(500).send('Error al parsear los datos');
         }
     });
-});
-
-// Servir el archivo HTML
-app.use(express.static('.'));
-
-// Iniciar el servidor
-app.listen(PORT, () => {
-    console.log(`Servidor corriendo en ${PORT}`);
 });

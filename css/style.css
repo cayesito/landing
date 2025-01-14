@@ -613,6 +613,7 @@ button {
 	height: 100vh;
 	display: flex;
 	align-items: center;
+  margin-left: 25vw;
 }
 
 .slider--btn {
@@ -809,6 +810,7 @@ button {
 	user-select: none;
 	perspective: 800px;
 	z-index: 100;
+  text-align: center;
 }
 
 .slide-info[data-current] {
@@ -850,9 +852,10 @@ button {
 }
 
 .slide-info--text {
-	font-family: var(--font-clash-display);
+	font-family: RockSalt;
 	color: #fff;
 	overflow: hidden;
+  text-align: center;
 
 	& span {
 		display: block;
